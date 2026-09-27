@@ -3,8 +3,10 @@
 
 **Vertical slice:** Mission 01 — Contaminated Industrial District  
 **Format:** Single-player, 2.5D action-survival extraction; one handcrafted 3D Unity mission scene  
+**Engine:** Unity 6.3  
 **Target platform:** Windows PC, keyboard and mouse  
-**Status:** Proposed implementation; concept art illustrates direction, not completed gameplay.
+**Repository:** [SWE402-project-CargoSquad](https://github.com/AbdulazizAlwKfupm/SWE402-project-CargoSquad)  
+**Status:** Phase 1 proposed implementation; concept art illustrates direction, not completed gameplay.
 
 | Team member | Student ID | Primary ownership |
 | --- | --- | --- |
@@ -82,7 +84,7 @@ The warehouse and factory connect through the central yard. A longer perimeter/s
 
 The research gate opens when a valid crate or local ballast is placed on its weight platform. After activation, the gate latches open and the puzzle flag persists, so retrieving the weight cannot trap the player. A reusable ballast object prevents the puzzle becoming impossible after the required crates have been extracted. It uses cargo interaction but is not a fourth recovery objective.
 
-![Mission 01 map concept](images/mission-map.png)
+![Mission 01 map concept](Map%20and%20Mssion%20preview.png)
 
 *Concept direction: final geometry will be reduced to a compact graybox. Day/Night thumbnails and decorative density are visual references; only one lighting preset is committed scope.*
 
@@ -126,7 +128,7 @@ Our original systems are cargo Grip/Condition, survivor risk, repeat extraction,
 
 ### Toolchain and architecture
 
-Use **Unity 6 with C#, URP, Input System, Cinemachine, AI Navigation, Animator, Unity UI/TextMeshPro, and AudioMixer**. This is the proposed stack; the baseline task locks one team-compatible editor patch and package versions in `ProjectVersion.txt`, `manifest.json`, and `packages-lock.json`. No version upgrade during a phase without a reviewed migration. VS Code, Git/GitHub, and the Unity Profiler support development. Use original or appropriately licensed assets and keep an asset-credit register.
+Use **Unity 6.3 with C#, URP, Input System, Cinemachine, AI Navigation, Animator, Unity UI/TextMeshPro, and AudioMixer**. This is the proposed stack; the baseline task locks one team-compatible editor patch and package versions in `ProjectVersion.txt`, `manifest.json`, and `packages-lock.json`. No version upgrade during a phase without a reviewed migration. VS Code, Git/GitHub, and the Unity Profiler support development. Use original or appropriately licensed assets and keep an asset-credit register.
 
 `CharacterData`, `CargoData`, `WeaponData`, and `EnemyData` ScriptableObjects store configuration. Mutable run progress belongs to a separate runtime model, not the shared configuration assets. [Unity documents this distinction for deployed builds](https://docs.unity3d.com/6000.2/Documentation/Manual/class-ScriptableObject.html).
 
@@ -163,7 +165,7 @@ CharacterController movement must explicitly apply gravity; [`Move` does not do 
 
 ### GitHub Project board plan
 
-Create one team repository and one Project named **Contaminated Recovery — SWE402**. The board is planned, not represented as already created in this package. Use **Backlog → Ready → In Progress → Review → Testing → Done**, with Phase, Priority, Owner, Reviewer, Estimate, and Dependency fields. Labels: `gameplay`, `cargo`, `ai`, `level`, `ui`, `art-audio`, `bug`, `documentation`.
+Use the existing team repository and maintain one GitHub Project named **Contaminated Recovery — SWE402**. Use **Backlog → Ready → In Progress → Review → Testing → Done**, with Phase, Priority, Owner, Reviewer, Estimate, and Dependency fields. Labels: `gameplay`, `cargo`, `ai`, `level`, `ui`, `art-audio`, `bug`, `documentation`.
 
 Each row below becomes an issue, retaining its planning ID in the title. IDs are not existing GitHub issue numbers. Start with one active implementation issue per member; split any issue exceeding eight focused hours. Estimates are provisional focused person-hours, not promised calendar dates. Set actual due dates to the instructor's schedule at kickoff.
 
@@ -243,16 +245,12 @@ Testing combines focused rule checks for state transitions, extraction idempoten
 
 **Definition of Done:** Issue acceptance criteria pass; owner supplies evidence; a teammate reviews the PR; integration smoke test passes; relevant documentation/credits update; board moves to Done only after merge and verification. Use `feature/<issue>-<name>` branches, meaningful commits, PR links to issues, and at least one teammate approval. Do not commit features directly to `main`.
 
-## 8. Visual direction and source basis
+## 8. Visual direction and concept art
 
-![Survivor squad concept](images/survivor-squad.png)
+![Survivor squad concept](Characters%20and%20Abilities.png)
 
-![Contaminated creatures concept](images/contaminated-creatures.png)
+![Contaminated creatures concept](Monsters%20pre-expectation.png)
 
 *AI-generated concept sheets support visual discussion. Their labels/stat bars are illustrative, not finalized balance values, production assets, or screenshots of an implemented build. This proposal controls scope where an illustration implies extra content.*
 
-This proposal consolidates the supplied `proposal(1).md`, `Game_Foundation_2.5D_Revised.pdf`, and `image prompt.md`. It preserves the foundation's defining systems while limiting the course build to one scene. Personal progression, extra missions and expanded systems remain outside the semester commitment.
-
-**Course references:** [Phase 1 requirements and rubric](https://github.com/gamedevkfupm/swe402/blob/main/project/Phase1_Proposal_Description.md) · [Full project description](https://github.com/gamedevkfupm/swe402/blob/main/project/project_description.md). Requirements checked 27 September 2026.
-
-**Repository support:** [README](../../README.md) · [Contribution rules](../../CONTRIBUTING.md) · [Submission checklist](submission-checklist.md). The required assessed proposal is this file at `docs/phase1/proposal.md`; the companion files support repository setup and submission.
+The concept art communicates the intended visual direction and gameplay roles only. Final production assets, balance values, scene geometry, and presentation details will be validated through implementation and playtesting during later phases.
