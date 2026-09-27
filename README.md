@@ -1,1 +1,0 @@
-# SWE402-project-CargoSquad
