@@ -1,0 +1,34 @@
+# Unity-generated directories
+/CargoSquad/[Ll]ibrary/
+/CargoSquad/[Tt]emp/
+/CargoSquad/[Oo]bj/
+/CargoSquad/[Ll]ogs/
+/CargoSquad/[Bb]uild/
+/CargoSquad/[Bb]uilds/
+/CargoSquad/[Uu]ser[Ss]ettings/
+/CargoSquad/[Mm]emoryCaptures/
+/CargoSquad/[Rr]ecordings/
+
+/CargoSquad/[Aa]ssets/StreamingAssets/aa/
+/CargoSquad/[Aa]ssets/StreamingAssets/aa.meta
+
+# Generated IDE files
+/CargoSquad/.vs/
+/CargoSquad/.idea/
+/CargoSquad/.gradle/
+/CargoSquad/ExportedObj/
+/CargoSquad/*.csproj
+/CargoSquad/*.sln
+/CargoSquad/*.slnx
+/CargoSquad/*.suo
+/CargoSquad/*.user
+/CargoSquad/*.userprefs
+/CargoSquad/*.pidb
+/CargoSquad/*.booproj
+/CargoSquad/*.unityproj
+
+# Crash reports and OS metadata
+/CargoSquad/sysinfo.txt
+/CargoSquad/mono_crash.*
+.DS_Store
+Thumbs.db
