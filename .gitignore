@@ -1,3 +1,4 @@
+# Track CargoSquad/Assets, Packages, ProjectSettings, and their .meta files.
 # Unity-generated directories
 /CargoSquad/[Ll]ibrary/
 /CargoSquad/[Tt]emp/
@@ -9,10 +10,12 @@
 /CargoSquad/[Mm]emoryCaptures/
 /CargoSquad/[Rr]ecordings/
 
+# Addressables build output, when generated.
 /CargoSquad/[Aa]ssets/StreamingAssets/aa/
 /CargoSquad/[Aa]ssets/StreamingAssets/aa.meta
 
 # Generated IDE files
+/.vs/
 /CargoSquad/.vs/
 /CargoSquad/.idea/
 /CargoSquad/.gradle/
@@ -32,3 +35,9 @@
 /CargoSquad/mono_crash.*
 .DS_Store
 Thumbs.db
+
+# Local art backups and Python bytecode
+/ArtSource/Backups/
+*.blend[0-9]*
+__pycache__/
+*.py[cod]

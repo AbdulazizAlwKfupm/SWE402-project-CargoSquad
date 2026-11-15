@@ -1,0 +1,6 @@
+{
+    "name": "CargoSquad.Tests",
+    "references": ["CargoSquad.Runtime", "Unity.InputSystem"],
+    "includePlatforms": ["Editor"],
+    "optionalUnityReferences": ["TestAssemblies"]
+}
