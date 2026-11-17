@@ -1,0 +1,4 @@
+{
+    "name": "CargoSquad.Runtime",
+    "references": ["Unity.InputSystem"]
+}

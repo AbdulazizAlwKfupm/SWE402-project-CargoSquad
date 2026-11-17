@@ -1,0 +1,138 @@
+[
+ {
+  "id": "denim_fabric",
+  "type": "texture",
+  "name": "Denim Fabric",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "maps": [
+   "diff",
+   "nor_gl",
+   "rough",
+   "arm"
+  ],
+  "bytes": 2052385
+ },
+ {
+  "id": "rough_linen",
+  "type": "texture",
+  "name": "Rough Linen",
+  "authors": [
+   "colormass",
+   "Rico Cilliers"
+  ],
+  "maps": [
+   "diff",
+   "nor_gl",
+   "rough",
+   "arm"
+  ],
+  "bytes": 4027762
+ },
+ {
+  "id": "fabric_leather_01",
+  "type": "texture",
+  "name": "Fabric Leather 01",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "maps": [
+   "diff",
+   "nor_gl",
+   "rough",
+   "arm"
+  ],
+  "bytes": 2077910
+ },
+ {
+  "id": "rusty_metal_03",
+  "type": "texture",
+  "name": "Rusty Metal 03",
+  "authors": [
+   "Amal Kumar"
+  ],
+  "maps": [
+   "diff",
+   "nor_gl",
+   "rough",
+   "arm"
+  ],
+  "bytes": 2324371
+ },
+ {
+  "id": "metal_plate_02",
+  "type": "texture",
+  "name": "Metal Plate 02",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "maps": [
+   "diff",
+   "nor_gl",
+   "rough",
+   "arm"
+  ],
+  "bytes": 2796792
+ },
+ {
+  "id": "old_gas_mask",
+  "type": "model",
+  "name": "Old Gas Mask",
+  "authors": [
+   "Michał Wiśniewski"
+  ],
+  "polycount": 18900,
+  "bytes": 2262447
+ },
+ {
+  "id": "old_military_crate",
+  "type": "model",
+  "name": "Old Military Crate",
+  "authors": [
+   "Jack Mava"
+  ],
+  "polycount": 10476,
+  "bytes": 2495423
+ },
+ {
+  "id": "ammo_box",
+  "type": "model",
+  "name": "Ammo Box",
+  "authors": [
+   "DanKit"
+  ],
+  "polycount": 4382,
+  "bytes": 1472675
+ },
+ {
+  "id": "metal_jerrycan_green",
+  "type": "model",
+  "name": "Metal Jerrycan Green",
+  "authors": [
+   "Ulan Cabanilla"
+  ],
+  "polycount": 9636,
+  "bytes": 2655089
+ },
+ {
+  "id": "garden_gloves_01",
+  "type": "model",
+  "name": "Garden Gloves 01",
+  "authors": [
+   "Satyaki Mandal"
+  ],
+  "polycount": 6822,
+  "bytes": 2904697
+ },
+ {
+  "id": "rubber_boots",
+  "type": "model",
+  "name": "Rubber Boots",
+  "authors": [
+   "L"
+  ],
+  "polycount": 35004,
+  "bytes": 2012425
+ }
+]

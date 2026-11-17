@@ -1,0 +1,417 @@
+{
+ "materials": [
+  {
+   "name": "Armored_Bone",
+   "hex": "#B9B19A",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Armored_Eye",
+   "hex": "#C9C44A",
+   "rough": 0.3,
+   "metal": 0.0,
+   "emit": "#C9C44A"
+  },
+  {
+   "name": "Armored_Fissure",
+   "hex": "#7E8A3A",
+   "rough": 0.6,
+   "metal": 0.0,
+   "emit": "#39401A"
+  },
+  {
+   "name": "Armored_Hide",
+   "hex": "#34302C",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Armored_Plate",
+   "hex": "#5A5046",
+   "rough": 0.95,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Armored_PlateDark",
+   "hex": "#2B2826",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Armored_PlateRust",
+   "hex": "#6B4A35",
+   "rough": 0.95,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_Boot",
+   "hex": "#2A2D2F",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_DarkRubber",
+   "hex": "#17191B",
+   "rough": 0.6,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_FilterGrey",
+   "hex": "#5A5F5E",
+   "rough": 0.6,
+   "metal": 0.3,
+   "emit": ""
+  },
+  {
+   "name": "CS_Glove",
+   "hex": "#2F3437",
+   "rough": 0.8,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_Gunmetal",
+   "hex": "#2A2D30",
+   "rough": 0.45,
+   "metal": 0.8,
+   "emit": ""
+  },
+  {
+   "name": "CS_Skin_A",
+   "hex": "#A9805F",
+   "rough": 0.75,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_Strap",
+   "hex": "#3A3B36",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "CS_coil",
+   "hex": "#9A6B3C",
+   "rough": 0.4,
+   "metal": 0.8,
+   "emit": ""
+  },
+  {
+   "name": "CS_led",
+   "hex": "#E8A23A",
+   "rough": 0.4,
+   "metal": 0.0,
+   "emit": "#E8A23A"
+  },
+  {
+   "name": "CS_lens",
+   "hex": "#7C8A7C",
+   "rough": 0.25,
+   "metal": 0.2,
+   "emit": ""
+  },
+  {
+   "name": "CS_wood",
+   "hex": "#5B4634",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Accent",
+   "hex": "#B86A3B",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Gear",
+   "hex": "#82775F",
+   "rough": 0.8,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Headgear",
+   "hex": "#48523F",
+   "rough": 0.65,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Jacket",
+   "hex": "#303A32",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Pack",
+   "hex": "#4C5546",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_Pants",
+   "hex": "#3A4439",
+   "rough": 0.88,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Heavy_vest",
+   "hex": "#3B463A",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Accent",
+   "hex": "#6BADA5",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Gear",
+   "hex": "#333D3C",
+   "rough": 0.8,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Headgear",
+   "hex": "#D3D8CC",
+   "rough": 0.65,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Jacket",
+   "hex": "#829186",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Pack",
+   "hex": "#B4BAAE",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_Pants",
+   "hex": "#75847A",
+   "rough": 0.88,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Medic_device",
+   "hex": "#4A5552",
+   "rough": 0.6,
+   "metal": 0.2,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Accent",
+   "hex": "#86A4B3",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Gear",
+   "hex": "#737B7B",
+   "rough": 0.8,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Headgear",
+   "hex": "#3C5261",
+   "rough": 0.65,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Jacket",
+   "hex": "#344754",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Pack",
+   "hex": "#5C6668",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Navy_Pants",
+   "hex": "#3A4A57",
+   "rough": 0.88,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Accent",
+   "hex": "#B48F55",
+   "rough": 0.7,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Gear",
+   "hex": "#594C50",
+   "rough": 0.8,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Headgear",
+   "hex": "#594C50",
+   "rough": 0.65,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Jacket",
+   "hex": "#2E3539",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Pack",
+   "hex": "#4A4144",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_Pants",
+   "hex": "#353B3F",
+   "rough": 0.88,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Scout_scarf",
+   "hex": "#6A4A43",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_Bone",
+   "hex": "#C9C2A6",
+   "rough": 0.6,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_Eye",
+   "hex": "#1B1A16",
+   "rough": 0.2,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_Hide",
+   "hex": "#8B8270",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_HideDark",
+   "hex": "#514A40",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_Membrane",
+   "hex": "#A9A078",
+   "rough": 0.3,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Spitter_Sac",
+   "hex": "#8C9A3A",
+   "rough": 0.35,
+   "metal": 0.0,
+   "emit": "#2E3A10"
+  },
+  {
+   "name": "Spitter_SacEdge",
+   "hex": "#C8C64C",
+   "rough": 0.3,
+   "metal": 0.0,
+   "emit": "#5A5A16"
+  },
+  {
+   "name": "Wolf_Bone",
+   "hex": "#CBC4A9",
+   "rough": 0.6,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Wolf_DarkSkin",
+   "hex": "#2A2829",
+   "rough": 0.85,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Wolf_Eye",
+   "hex": "#E0B54A",
+   "rough": 0.3,
+   "metal": 0.0,
+   "emit": "#E0B54A"
+  },
+  {
+   "name": "Wolf_Flesh",
+   "hex": "#7C423C",
+   "rough": 0.6,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Wolf_Fur",
+   "hex": "#40372F",
+   "rough": 0.95,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Wolf_Lesion",
+   "hex": "#99973E",
+   "rough": 0.55,
+   "metal": 0.0,
+   "emit": ""
+  },
+  {
+   "name": "Wolf_SpineRidge",
+   "hex": "#978E7B",
+   "rough": 0.9,
+   "metal": 0.0,
+   "emit": ""
+  }
+ ]
+}
