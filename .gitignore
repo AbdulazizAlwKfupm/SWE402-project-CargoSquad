@@ -38,6 +38,15 @@ Thumbs.db
 
 # Local art backups and Python bytecode
 /ArtSource/Backups/
+
+# Dire Wolf Lite source download and standalone derivatives. Keep these local.
+/ArtSource/External/Dire_Wolf_Lite_v1.0.0/
+/ArtSource/External/Dire_Wolf_Lite_v1.0.0.meta
+/ArtSource/Characters/Creatures/old/MutatedWolf_Redesign_v1.*
+/ArtSource/Characters/Creatures/MutatedWolf_Redesign_v2.*
+# Store any extracted meshes, textures, or later exports from Dire Wolf Lite here.
+/ArtSource/Private/DireWolfLite/
+
 *.blend[0-9]*
 __pycache__/
 *.py[cod]
