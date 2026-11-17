@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.0437698">
+  <test-suite type="TestSuite" id="1000" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.043770" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1004" name="CargoSquad.Tests.dll" fullname="C:/Users/azooo/AppData/Local/Temp/CargoSquadHeavyValidation/Library/ScriptAssemblies/CargoSquad.Tests.dll" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.037086" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="9324" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1005" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.036669" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1006" name="Tests" fullname="CargoSquad.Tests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.036493" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="CargoGameplayTests" fullname="CargoSquad.Tests.CargoGameplayTests" classname="CargoSquad.Tests.CargoGameplayTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.035572" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="CharacterAssetsDifferentiateMovementAndStamina" fullname="CargoSquad.Tests.CargoGameplayTests.CharacterAssetsDifferentiateMovementAndStamina" methodname="CharacterAssetsDifferentiateMovementAndStamina" classname="CargoSquad.Tests.CargoGameplayTests" runstate="Runnable" seed="1495632710" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.019540" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="WeightAndStrengthScaleAllCarryPenalties" fullname="CargoSquad.Tests.CargoGameplayTests.WeightAndStrengthScaleAllCarryPenalties" methodname="WeightAndStrengthScaleAllCarryPenalties" classname="CargoSquad.Tests.CargoGameplayTests" runstate="Runnable" seed="1853903003" result="Passed" start-time="2026-11-17 19:45:11Z" end-time="2026-11-17 19:45:11Z" duration="0.002364" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/azooo/AppData/LocalLow/DefaultCompany/CargoSquad\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

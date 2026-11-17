@@ -52,6 +52,12 @@ namespace CargoSquad.Cargo
         public event Action<GameplayNoise> NoiseEmitted;
         public string Prompt { get; private set; }
 
+        public void SetCarrySocket(CargoCarrySocket socket)
+        {
+            if (CarriedCargo) throw new InvalidOperationException("Cannot switch visuals while carrying cargo.");
+            carrySocket = socket;
+        }
+
         private void Awake()
         {
             capsule = GetComponent<CapsuleCollider>();
@@ -78,6 +84,8 @@ namespace CargoSquad.Cargo
 
         private void Update()
         {
+            var ability = GetComponent<CharacterAbility>();
+            if (ability && ability.IsCharging) return;
             bool pressed = interact.WasPressedThisFrame();
             if (CarriedCargo)
             {

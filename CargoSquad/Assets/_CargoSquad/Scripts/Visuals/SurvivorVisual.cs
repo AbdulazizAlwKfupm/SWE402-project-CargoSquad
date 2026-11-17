@@ -55,7 +55,7 @@ namespace CargoSquad.Visuals
                 Quaternion target = Quaternion.LookRotation(velocity / speed, Vector3.up);
                 Quaternion next = Quaternion.RotateTowards(transform.rotation, target, turnSpeed * Time.deltaTime);
                 // Carried cargo must not be swung into a wall: the socket refuses turns that have no room.
-                if (!carrySocket || carrySocket.CanTurnTo(transform, next))
+                if (!carrySocket || (carrySocket.CanTurnAlong(transform, target) && carrySocket.CanTurnTo(transform, next)))
                     transform.rotation = next;
             }
 

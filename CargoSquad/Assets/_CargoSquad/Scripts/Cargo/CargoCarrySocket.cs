@@ -85,6 +85,18 @@ namespace CargoSquad.Cargo
         /// the carried cargo inside solid geometry and the carrier has no room to be pushed clear of it.
         /// Small overlaps with room behind the carrier are allowed: physics then slides the carrier out.
         /// </summary>
+        public bool CanTurnAlong(Transform root, Quaternion target)
+        {
+            if (!IsObstructing || !body) return true;
+            Quaternion start = root.rotation;
+            int samples = Mathf.Max(1, Mathf.CeilToInt(Quaternion.Angle(start, target) / 10f));
+            // Do not enter a partial turn that cannot finish in a narrow passage. Keeping the
+            // current safe facing lets the controller back out with the cargo still attached.
+            for (int i = 1; i <= samples; i++)
+                if (!CanTurnTo(root, Quaternion.Slerp(start, target, (float)i / samples))) return false;
+            return true;
+        }
+
         public bool CanTurnTo(Transform root, Quaternion rotation)
         {
             if (!IsObstructing || !body)
@@ -94,7 +106,7 @@ namespace CargoSquad.Cargo
             Vector3 localInRoot = Vector3.Scale(root.InverseTransformPoint(box.position), root.lossyScale);
             Vector3 center = root.position + rotation * localInRoot;
             Quaternion boxRotation = rotation * Quaternion.Inverse(root.rotation) * box.rotation;
-            Vector3 half = obstruction.size * 0.5f - Vector3.one * 0.01f;
+            Vector3 half = obstruction.size * 0.5f;
             int count = Physics.OverlapBoxNonAlloc(center, half, Overlaps, boxRotation, ~0, QueryTriggerInteraction.Ignore);
             Vector3 push = Vector3.zero;
             for (int i = 0; i < count; i++)

@@ -1,4 +1,5 @@
 using CargoSquad.Cargo;
+using CargoSquad.Combat;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,12 +18,16 @@ namespace CargoSquad.Player
         private InputAction sprint;
         private PlayerStamina stamina;
         private CargoInteractor carrier;
+        private CharacterAbility ability;
+        private Health health;
 
         private void Awake()
         {
             body = GetComponent<Rigidbody>();
             stamina = GetComponent<PlayerStamina>();
             carrier = GetComponent<CargoInteractor>();
+            ability = GetComponent<CharacterAbility>();
+            health = GetComponent<Health>();
             if (!inputActions ||
                 inputActions.FindAction("Player/Move") is not InputAction moveAction ||
                 inputActions.FindAction("Player/Sprint") is not InputAction sprintAction)
@@ -56,6 +61,17 @@ namespace CargoSquad.Player
 
         private void FixedUpdate()
         {
+            if (health && health.IsDead)
+            {
+                body.linearVelocity = new Vector3(0f, body.linearVelocity.y, 0f);
+                return;
+            }
+            if (ability && ability.TryGetChargeVelocity(Time.fixedDeltaTime, out Vector3 chargeVelocity))
+            {
+                body.linearVelocity = new Vector3(chargeVelocity.x, body.linearVelocity.y, chargeVelocity.z);
+                stamina?.Tick(false, 1f, Time.fixedDeltaTime);
+                return;
+            }
             Vector2 direction = Vector2.ClampMagnitude(move.ReadValue<Vector2>(), 1f);
             bool moving = direction.sqrMagnitude > 0.0001f;
             var character = stamina ? stamina.Definition : null;

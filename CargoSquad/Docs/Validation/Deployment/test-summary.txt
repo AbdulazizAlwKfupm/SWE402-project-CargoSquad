@@ -1,0 +1,22 @@
+Final validation: 15 / 15 Play-mode cases passed across the final runs.
+Main run: 13 passes; its remaining settled-contact timing check is superseded by the passing corridor rerun.
+Additional selected-character run: actual left-mouse bash/heal activation and redesigned Medic pickup/IK/drop/extraction all passed.
+Edit-mode: 2 / 2 passed.
+Unity 6000.3.22f1, local batch tests. No manual playthrough in the open editor is claimed.
+No unexpected gameplay Console errors in the passing test cases.
+
+Passed CargoSquad.Tests.CargoObstructionTests.IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns [corridor-final.xml]
+Passed CargoSquad.Tests.CargoObstructionTests.IndustrialDistrict_EverySurvivorAndCargoSizeIsBlocked [deployment-verified.xml]
+Passed CargoSquad.Tests.CargoSceneTests.SharedDefinitionKeepsIndependentConditionAndDestroyedCargoAllowsEscape [deployment-verified.xml]
+Passed CargoSquad.Tests.CargoSceneTests.StaminaAndSceneCargoLoop [deployment-verified.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.AbilitiesAreBlockedByUIHeldStartPressCargoAndDeath [deployment-verified.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.BashAnimatesAndStopsAtThinWall [deployment-verified.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.BashTravelsConfiguredDistanceAndDamagesTargetOnce [selected-characters-final.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.HeavyLocomotionIsSlowerAndUpright [deployment-verified.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap [selected-characters-final.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.MedicLocomotionIsFasterAndUpright [deployment-verified.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.RedesignedMedicPicksUpUsesHandIkDropsAndExtractsCargo [selected-characters-final.xml]
+Passed CargoSquad.Tests.CharacterDeploymentTests.SelectionPausesAndRealStartClickCannotActivateBash [deployment-verified.xml]
+Passed CargoSquad.Tests.FrontCarryTests.IndustrialDistrict_EverySurvivorCarriesOnItsOwnSocket [deployment-verified.xml]
+Passed CargoSquad.Tests.FrontCarryTests.IndustrialDistrict_PickupFrontCarryDropSlipAndExtraction [deployment-verified.xml]
+Passed CargoSquad.Tests.FrontCarryTests.Lineup_AllSurvivorsHoldTheSameCargoWithHandIk [deployment-verified.xml]

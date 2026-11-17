@@ -1,0 +1,6 @@
+Verified in the actual open Unity 6000.3.22f1 editor.
+Two subsequent script reloads completed after applying the workaround.
+New Edge.WakeUp errors: 0
+New NullReferenceExceptions: 0
+Animator view restored on Heavy_Player.
+Heavy, Medic and Navy state-machine/transition checks passed.

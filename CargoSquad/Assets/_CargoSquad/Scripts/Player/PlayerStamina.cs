@@ -18,6 +18,22 @@ namespace CargoSquad.Player
 
         private void Awake() => Current = Maximum;
 
+        public void SetDefinition(CharacterDefinition character)
+        {
+            definition = character;
+            Current = Maximum;
+            IsExhausted = false;
+            Changed?.Invoke(Current, Maximum);
+        }
+
+        // Restore to a target without ever reducing existing stamina.
+        public void RestoreTo(float target)
+        {
+            Current = Mathf.Max(Current, Mathf.Clamp(target, 0f, Maximum));
+            if (Current >= Maximum * Mathf.Clamp(resumeFraction, 0.01f, 1f)) IsExhausted = false;
+            Changed?.Invoke(Current, Maximum);
+        }
+
         // Returns whether the current physics step can use sprint speed.
         public bool Tick(bool wantsSprint, float loadMultiplier, float seconds)
         {

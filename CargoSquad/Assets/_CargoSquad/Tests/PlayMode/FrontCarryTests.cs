@@ -32,6 +32,7 @@ namespace CargoSquad.Tests
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
             yield return null;
+            Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;
             var player = Object.FindFirstObjectByType<CargoInteractor>();
             var cargo = Object.FindFirstObjectByType<CargoItem>();
@@ -88,7 +89,7 @@ namespace CargoSquad.Tests
                 Assert.That(cargo.GetComponent<Rigidbody>(), Is.Null);
                 Assert.That(Object.FindObjectsByType<CargoItem>(FindObjectsSortMode.None).Length, Is.EqualTo(1));
                 Vector3 heldLocal = cargo.transform.localPosition;
-                yield return new WaitForSeconds(1.1f);
+                yield return new WaitForSeconds(1.6f);
                 Assert.That(animator.GetCurrentAnimatorStateInfo(0).IsName("CarryLocomotion"), Is.True);
                 Assert.That(visual.Weapon.parent, Is.SameAs(visual.StowSocket));
                 Assert.That(Vector3.Distance(cargo.Size, size), Is.LessThan(1e-4f), "carrying does not rescale the cargo");
@@ -107,7 +108,8 @@ namespace CargoSquad.Tests
                          })
                 {
                     InputSystem.QueueStateEvent(keyboard, new KeyboardState(key));
-                    yield return new WaitForSeconds(0.7f);
+                    float turnSpeed = new SerializedObject(visual).FindProperty("turnSpeed").floatValue;
+                    yield return new WaitForSeconds(Mathf.Max(.7f, 180f / Mathf.Max(1f, turnSpeed) + .15f));
                     Assert.That(Vector3.Angle(visual.transform.forward, direction), Is.LessThan(10f), shot + " facing");
                     Vector3 toCrate = Centre(cargo) - visual.transform.position;
                     toCrate.y = 0f;
@@ -198,6 +200,7 @@ namespace CargoSquad.Tests
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
             yield return null;
+            Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;
             var player = Object.FindFirstObjectByType<CargoInteractor>();
             var cargo = Object.FindFirstObjectByType<CargoItem>();
@@ -224,7 +227,7 @@ namespace CargoSquad.Tests
                     yield return Tap(keyboard);
                     Assert.That(player.CarriedCargo, Is.SameAs(cargo), name + " picked up");
                     Assert.That(cargo.transform.parent, Is.SameAs(hands.Socket.transform), name + " uses its own socket");
-                    yield return new WaitForSeconds(1.1f);
+                    yield return new WaitForSeconds(1.6f);
                     Assert.That(animator.GetCurrentAnimatorStateInfo(0).IsName("CarryLocomotion"), Is.True, name);
                     AssertHeld(hands, animator, cargo.transform, Centre(cargo), size, name);
                     float head = animator.GetBoneTransform(HumanBodyBones.Head).position.y;

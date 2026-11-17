@@ -22,6 +22,7 @@ namespace CargoSquad.Tests
         {
             EditorSceneManager.LoadSceneInPlayMode(Scene, new UnityEngine.SceneManagement.LoadSceneParameters());
             yield return null;
+            Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             var player = Object.FindFirstObjectByType<CargoInteractor>();
             var cargo = Object.FindFirstObjectByType<CargoItem>();
             var extraction = Object.FindFirstObjectByType<CargoExtraction>();
@@ -111,6 +112,7 @@ namespace CargoSquad.Tests
         {
             EditorSceneManager.LoadSceneInPlayMode(Scene, new UnityEngine.SceneManagement.LoadSceneParameters());
             yield return null;
+            Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             var cargo = Object.FindFirstObjectByType<CargoItem>();
             var duplicate = Object.Instantiate(cargo.gameObject);
             var other = duplicate.GetComponent<CargoCondition>();

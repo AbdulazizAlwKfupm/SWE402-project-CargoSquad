@@ -355,6 +355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NavySoldier_Visual
       objectReference: {fileID: 0}
+    - target: {fileID: 29856925534401204, guid: b9a8042052d9c144eb76fd75dda1f2d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 802135632722814990, guid: b9a8042052d9c144eb76fd75dda1f2d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -517,6 +521,106 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342552828}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &418118862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1171018293}
+    m_Modifications:
+    - target: {fileID: 168083246383976613, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: turnSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 168083246383976613, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: fullSpeedReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156514211866079717, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_Name
+      value: Heavy_new
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156514211866079717, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158728991613085819, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+      propertyPath: lockSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+--- !u!114 &418118863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9106513557418011868, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+  m_PrefabInstance: {fileID: 418118862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08c42ea27342be5439aa81995e97c7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Cargo.CargoCarrySocket
+--- !u!4 &418118864 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5531633062652652383, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+  m_PrefabInstance: {fileID: 418118862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &418118865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168083246383976613, guid: 7d24b73518111534f87aa71db1cbdf48, type: 3}
+  m_PrefabInstance: {fileID: 418118862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b593c1019f09f664aa159dcdcafd7a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Visuals.SurvivorVisual
 --- !u!1 &532566338
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +1024,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751632599}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &765815201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765815203}
+  - component: {fileID: 765815202}
+  m_Layer: 0
+  m_Name: CharacterDeployment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &765815202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765815201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494ae74524b48564eb63704ae2c032be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.UI.CharacterSelection
+  player: {fileID: 1171018294}
+  heavy: {fileID: 418118865}
+  medic: {fileID: 1453597209}
+  heavyDefinition: {fileID: 11400000, guid: 725bdca6671be9a4ea74c9d7411ae84a, type: 2}
+  medicDefinition: {fileID: 11400000, guid: a9d4df2d2fbc7644c87cd691858e4195, type: 2}
+  gameplayOverlay: {fileID: 1509678290}
+--- !u!4 &765815203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765815201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774129873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1579,6 +1733,8 @@ GameObject:
   - component: {fileID: 1171018296}
   - component: {fileID: 1171018298}
   - component: {fileID: 1171018297}
+  - component: {fileID: 1171018300}
+  - component: {fileID: 1171018299}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Untagged
@@ -1680,6 +1836,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 342196427}
+  - {fileID: 418118864}
+  - {fileID: 1453597208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1171018294
@@ -1743,7 +1901,7 @@ MonoBehaviour:
   ground: {fileID: 2011454894}
   interactionRange: 2
   carryOffset: {x: 0, y: 1.8, z: 0}
-  carrySocket: {fileID: 0}
+  carrySocket: {fileID: 418118863}
 --- !u!114 &1171018297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,6 +1931,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Player.PlayerStamina
   definition: {fileID: 11400000, guid: 440e3139bb942f645a0452366e633814, type: 2}
   resumeFraction: 0.25
+--- !u!114 &1171018299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171018289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d209b68b105eee145a3d12f0aee4606b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Player.CharacterAbility
+  chargeSpeed: 11
+  chargeDistance: 3
+  chargeDamage: 35
+  chargeCooldown: 4
+  medicCooldown: 12
+--- !u!114 &1171018300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171018289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f2b79291618c4891d5288eae6e9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.Health
+  maximum: 100
 --- !u!1 &1234429213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,6 +2317,83 @@ MonoBehaviour:
   survivorEscaped:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1453597207
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1171018293}
+    m_Modifications:
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440699482992996276, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_Name
+      value: Medic_redisgned
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440699482992996276, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+--- !u!4 &1453597208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2446254243437390550, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+  m_PrefabInstance: {fileID: 1453597207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1453597209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1522629964159535498, guid: d4d6bdebbb6fc454199928382fda1ccc, type: 3}
+  m_PrefabInstance: {fileID: 1453597207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b593c1019f09f664aa159dcdcafd7a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Visuals.SurvivorVisual
 --- !u!1 &1477961952
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,3 +3334,4 @@ SceneRoots:
   - {fileID: 1481170973}
   - {fileID: 1427214473}
   - {fileID: 1678700893}
+  - {fileID: 765815203}

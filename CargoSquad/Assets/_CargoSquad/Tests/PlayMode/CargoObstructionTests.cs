@@ -130,6 +130,7 @@ namespace CargoSquad.Tests
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
             yield return null;
+            Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;
             rig.Player = Object.FindFirstObjectByType<CargoInteractor>();
             rig.Cargo = Object.FindFirstObjectByType<CargoItem>();
@@ -234,6 +235,8 @@ namespace CargoSquad.Tests
                 Debug.Log($"[wall] slide: moved {rig.Body.position.x - x:F2} m along the wall, deepest {deepest:F3} m");
                 Assert.That(rig.Body.position.x - x, Is.GreaterThan(1.2f), "slides along the wall");
                 Assert.That(deepest, Is.LessThan(Transient));
+                // A settled-contact assertion needs released input, rather than another driven impact.
+                yield return rig.Release(0.1f);
                 Assert.That(rig.Penetration(), Is.LessThan(Settled));
 
                 // --- 3. never trapped: walking away is immediate

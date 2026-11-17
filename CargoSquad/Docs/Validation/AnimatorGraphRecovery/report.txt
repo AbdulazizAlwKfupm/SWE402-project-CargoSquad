@@ -1,0 +1,7 @@
+Heavy, Medic and Navy controller transitions valid.
+Closed Animator windows: 1. Discarded temporary graphs: 2.
+Controller assets and open scene were not modified.
+Before script reload: closed Animator view; discarded temporary graphs: 1.
+After script reload: restored Animator view on Assets/_CargoSquad/Art/Animations/Humanoid/Heavy_Player.controller.
+Before script reload: closed Animator view; discarded temporary graphs: 1.
+After script reload: restored Animator view on Assets/_CargoSquad/Art/Animations/Humanoid/Heavy_Player.controller.

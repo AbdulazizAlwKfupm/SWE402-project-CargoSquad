@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Failed(Child)" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:44:14Z" duration="63.0308005">
+  <test-suite type="TestSuite" id="1030" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:44:14Z" duration="63.030801" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1024" name="CargoSquad.PlayModeTests.dll" fullname="C:/Users/azooo/AppData/Local/Temp/CargoSquadHeavyValidation/Library/ScriptAssemblies/CargoSquad.PlayModeTests.dll" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:44:14Z" duration="63.022729" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22188" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1025" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:44:14Z" duration="63.021801" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="SetUpFixture" id="1023" name="Tests" fullname="CargoSquad.Tests.PlayModeInputSetup" classname="CargoSquad.Tests.PlayModeInputSetup" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:44:14Z" duration="63.020834" total="14" passed="13" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="CargoObstructionTests" fullname="CargoSquad.Tests.CargoObstructionTests" classname="CargoSquad.Tests.CargoObstructionTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:43:32Z" duration="21.020696" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1002" name="IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" fullname="CargoSquad.Tests.CargoObstructionTests.IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" methodname="IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" classname="CargoSquad.Tests.CargoObstructionTests" runstate="Runnable" seed="2131909759" result="Failed" start-time="2026-11-17 19:43:11Z" end-time="2026-11-17 19:43:16Z" duration="4.186892" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: less than 0.00999999978f
+  But was:  0.0119765699f
+]]></message>
+                <stack-trace><![CDATA[at CargoSquad.Tests.CargoObstructionTests+<IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns>d__8.MoveNext () [0x00505] in C:\Users\azooo\AppData\Local\Temp\CargoSquadHeavyValidation\Assets\_CargoSquad\Tests\PlayMode\CargoObstructionTests.cs:238
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@bd7f943e9647\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[[wall] test patch at (-10, -3); scenery switched off for this run: Concrete Barrier West
+[wall] head-on: cargo front 0.000 m past the wall face, body 0.750 m back, deepest 0.024 m
+[wall] slide: moved 1.75 m along the wall, deepest 0.012 m
+]]></output>
+            </test-case>
+            <test-case id="1003" name="IndustrialDistrict_EverySurvivorAndCargoSizeIsBlocked" fullname="CargoSquad.Tests.CargoObstructionTests.IndustrialDistrict_EverySurvivorAndCargoSizeIsBlocked" methodname="IndustrialDistrict_EverySurvivorAndCargoSizeIsBlocked" classname="CargoSquad.Tests.CargoObstructionTests" runstate="Runnable" seed="973520349" result="Passed" start-time="2026-11-17 19:43:16Z" end-time="2026-11-17 19:43:32Z" duration="16.822933" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[wall] test patch at (-10, -3); scenery switched off for this run: Concrete Barrier West
+[wall] Heavy_Visual with (0.80, 0.30, 0.60) cargo: front 0.000 m past the wall, body 0.85 m back, deepest 0.026 m
+[wall] Scout_Visual with (0.60, 0.45, 0.45) cargo: front 0.000 m past the wall, body 0.65 m back, deepest 0.021 m
+[wall] Medic_Visual with (0.40, 0.40, 0.90) cargo: front 0.000 m past the wall, body 1.11 m back, deepest 0.000 m
+[wall] NavySoldier_Visual with (0.70, 0.50, 0.30) cargo: front 0.000 m past the wall, body 0.53 m back, deepest 0.000 m
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1004" name="CargoSceneTests" fullname="CargoSquad.Tests.CargoSceneTests" classname="CargoSquad.Tests.CargoSceneTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:43:32Z" end-time="2026-11-17 19:43:35Z" duration="2.306132" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1006" name="SharedDefinitionKeepsIndependentConditionAndDestroyedCargoAllowsEscape" fullname="CargoSquad.Tests.CargoSceneTests.SharedDefinitionKeepsIndependentConditionAndDestroyedCargoAllowsEscape" methodname="SharedDefinitionKeepsIndependentConditionAndDestroyedCargoAllowsEscape" classname="CargoSquad.Tests.CargoSceneTests" runstate="Runnable" seed="1149805041" result="Passed" start-time="2026-11-17 19:43:32Z" end-time="2026-11-17 19:43:33Z" duration="0.349949" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="StaminaAndSceneCargoLoop" fullname="CargoSquad.Tests.CargoSceneTests.StaminaAndSceneCargoLoop" methodname="StaminaAndSceneCargoLoop" classname="CargoSquad.Tests.CargoSceneTests" runstate="Runnable" seed="1854763421" result="Passed" start-time="2026-11-17 19:43:33Z" end-time="2026-11-17 19:43:35Z" duration="1.954887" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1007" name="CharacterDeploymentTests" fullname="CargoSquad.Tests.CharacterDeploymentTests" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-17 19:43:35Z" end-time="2026-11-17 19:43:51Z" duration="16.230102" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1014" name="AbilitiesAreBlockedByUIHeldStartPressCargoAndDeath" fullname="CargoSquad.Tests.CharacterDeploymentTests.AbilitiesAreBlockedByUIHeldStartPressCargoAndDeath" methodname="AbilitiesAreBlockedByUIHeldStartPressCargoAndDeath" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="286087558" result="Passed" start-time="2026-11-17 19:43:35Z" end-time="2026-11-17 19:43:35Z" duration="0.465531" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="BashAnimatesAndStopsAtThinWall" fullname="CargoSquad.Tests.CharacterDeploymentTests.BashAnimatesAndStopsAtThinWall" methodname="BashAnimatesAndStopsAtThinWall" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="707334670" result="Passed" start-time="2026-11-17 19:43:35Z" end-time="2026-11-17 19:43:36Z" duration="0.849173" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="BashTravelsConfiguredDistanceAndDamagesTargetOnce" fullname="CargoSquad.Tests.CharacterDeploymentTests.BashTravelsConfiguredDistanceAndDamagesTargetOnce" methodname="BashTravelsConfiguredDistanceAndDamagesTargetOnce" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="959466572" result="Passed" start-time="2026-11-17 19:43:36Z" end-time="2026-11-17 19:43:42Z" duration="5.548996" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="HeavyLocomotionIsSlowerAndUpright" fullname="CargoSquad.Tests.CharacterDeploymentTests.HeavyLocomotionIsSlowerAndUpright" methodname="HeavyLocomotionIsSlowerAndUpright" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="1550945357" result="Passed" start-time="2026-11-17 19:43:42Z" end-time="2026-11-17 19:43:46Z" duration="4.138330" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" fullname="CargoSquad.Tests.CharacterDeploymentTests.MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" methodname="MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="1085251392" result="Passed" start-time="2026-11-17 19:43:46Z" end-time="2026-11-17 19:43:46Z" duration="0.660892" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="MedicLocomotionIsFasterAndUpright" fullname="CargoSquad.Tests.CharacterDeploymentTests.MedicLocomotionIsFasterAndUpright" methodname="MedicLocomotionIsFasterAndUpright" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="421215417" result="Passed" start-time="2026-11-17 19:43:46Z" end-time="2026-11-17 19:43:50Z" duration="4.129670" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="SelectionPausesAndRealStartClickCannotActivateBash" fullname="CargoSquad.Tests.CharacterDeploymentTests.SelectionPausesAndRealStartClickCannotActivateBash" methodname="SelectionPausesAndRealStartClickCannotActivateBash" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="180224350" result="Passed" start-time="2026-11-17 19:43:50Z" end-time="2026-11-17 19:43:51Z" duration="0.434640" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1019" name="FrontCarryTests" fullname="CargoSquad.Tests.FrontCarryTests" classname="CargoSquad.Tests.FrontCarryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-17 19:43:51Z" end-time="2026-11-17 19:44:14Z" duration="23.458384" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1021" name="IndustrialDistrict_EverySurvivorCarriesOnItsOwnSocket" fullname="CargoSquad.Tests.FrontCarryTests.IndustrialDistrict_EverySurvivorCarriesOnItsOwnSocket" methodname="IndustrialDistrict_EverySurvivorCarriesOnItsOwnSocket" classname="CargoSquad.Tests.FrontCarryTests" runstate="Runnable" seed="1850274468" result="Passed" start-time="2026-11-17 19:43:51Z" end-time="2026-11-17 19:43:59Z" duration="8.468271" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[front] Heavy_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[game] Heavy_Visual: crate centre 1.16 m, head 1.65 m
+[front] Scout_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[game] Scout_Visual: crate centre 1.03 m, head 1.47 m
+[front] Medic_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[game] Medic_Visual: crate centre 1.06 m, head 1.51 m
+[front] NavySoldier_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[game] NavySoldier_Visual: crate centre 1.10 m, head 1.57 m
+]]></output>
+            </test-case>
+            <test-case id="1020" name="IndustrialDistrict_PickupFrontCarryDropSlipAndExtraction" fullname="CargoSquad.Tests.FrontCarryTests.IndustrialDistrict_PickupFrontCarryDropSlipAndExtraction" methodname="IndustrialDistrict_PickupFrontCarryDropSlipAndExtraction" classname="CargoSquad.Tests.FrontCarryTests" runstate="Runnable" seed="1865343290" result="Passed" start-time="2026-11-17 19:43:59Z" end-time="2026-11-17 19:44:11Z" duration="11.290317" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[game] cargo size (0.60, 0.45, 0.45), resting bottom 0.000
+[front] Navy idle LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Navy idle RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 53_game_carry_left LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 53_game_carry_left RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 54_game_carry_toward_camera LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 54_game_carry_toward_camera RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 55_game_carry_right LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 55_game_carry_right RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 56_game_carry_away LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] 56_game_carry_away RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] run LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] run RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[game] blocked at z=-3.77 y=1.00, crate near face z=-3.28
+]]></output>
+            </test-case>
+            <test-case id="1022" name="Lineup_AllSurvivorsHoldTheSameCargoWithHandIk" fullname="CargoSquad.Tests.FrontCarryTests.Lineup_AllSurvivorsHoldTheSameCargoWithHandIk" methodname="Lineup_AllSurvivorsHoldTheSameCargoWithHandIk" classname="CargoSquad.Tests.FrontCarryTests" runstate="Runnable" seed="659928465" result="Passed" start-time="2026-11-17 19:44:11Z" end-time="2026-11-17 19:44:14Z" duration="3.697972" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[front] NavySoldier_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual walking LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual walking RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual walking LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual walking RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual walking LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual walking RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual walking LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual walking RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual wide cargo LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] NavySoldier_Visual wide cargo RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual wide cargo LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Heavy_Visual wide cargo RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Scout_Visual wide cargo LeftHand: grip error 0.3 cm, wrist 0.029 m outside the side face
+[front] Scout_Visual wide cargo RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual wide cargo LeftHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+[front] Medic_Visual wide cargo RightHand: grip error 0.0 cm, wrist 0.030 m outside the side face
+Saving results to: C:/Users/azooo/AppData/LocalLow/DefaultCompany/CargoSquad\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

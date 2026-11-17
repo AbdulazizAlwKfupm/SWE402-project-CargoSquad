@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.5634256">
+  <test-suite type="TestSuite" id="1031" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.563426" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1025" name="CargoSquad.PlayModeTests.dll" fullname="C:/Users/azooo/AppData/Local/Temp/CargoSquadHeavyValidation/Library/ScriptAssemblies/CargoSquad.PlayModeTests.dll" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.554822" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="34376" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1026" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.553684" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="SetUpFixture" id="1024" name="Tests" fullname="CargoSquad.Tests.PlayModeInputSetup" classname="CargoSquad.Tests.PlayModeInputSetup" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.552504" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1007" name="CharacterDeploymentTests" fullname="CargoSquad.Tests.CharacterDeploymentTests" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:13Z" duration="8.547312" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1013" name="BashTravelsConfiguredDistanceAndDamagesTargetOnce" fullname="CargoSquad.Tests.CharacterDeploymentTests.BashTravelsConfiguredDistanceAndDamagesTargetOnce" methodname="BashTravelsConfiguredDistanceAndDamagesTargetOnce" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="2112038580" result="Passed" start-time="2026-11-17 19:50:05Z" end-time="2026-11-17 19:50:11Z" duration="5.857797" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" fullname="CargoSquad.Tests.CharacterDeploymentTests.MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" methodname="MedicCardClickSelectsMedicAndRestoresStaminaWithCooldownAndCap" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="223401706" result="Passed" start-time="2026-11-17 19:50:11Z" end-time="2026-11-17 19:50:11Z" duration="0.673948" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="RedesignedMedicPicksUpUsesHandIkDropsAndExtractsCargo" fullname="CargoSquad.Tests.CharacterDeploymentTests.RedesignedMedicPicksUpUsesHandIkDropsAndExtractsCargo" methodname="RedesignedMedicPicksUpUsesHandIkDropsAndExtractsCargo" classname="CargoSquad.Tests.CharacterDeploymentTests" runstate="Runnable" seed="1154973789" result="Passed" start-time="2026-11-17 19:50:11Z" end-time="2026-11-17 19:50:13Z" duration="2.003098" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/azooo/AppData/LocalLow/DefaultCompany/CargoSquad\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.6283289">
+  <test-suite type="TestSuite" id="1030" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.628329" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1024" name="CargoSquad.PlayModeTests.dll" fullname="C:/Users/azooo/AppData/Local/Temp/CargoSquadHeavyValidation/Library/ScriptAssemblies/CargoSquad.PlayModeTests.dll" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.620433" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="35904" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1025" name="CargoSquad" fullname="CargoSquad" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.619594" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="SetUpFixture" id="1023" name="Tests" fullname="CargoSquad.Tests.PlayModeInputSetup" classname="CargoSquad.Tests.PlayModeInputSetup" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.618571" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="CargoObstructionTests" fullname="CargoSquad.Tests.CargoObstructionTests" classname="CargoSquad.Tests.CargoObstructionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.614233" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" fullname="CargoSquad.Tests.CargoObstructionTests.IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" methodname="IndustrialDistrict_CarriedCargoIsBlockedByWallsCorridorsAndTurns" classname="CargoSquad.Tests.CargoObstructionTests" runstate="Runnable" seed="1798798179" result="Passed" start-time="2026-11-17 19:46:02Z" end-time="2026-11-17 19:46:18Z" duration="15.603902" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[wall] test patch at (-10, -3); scenery switched off for this run: Concrete Barrier West
+[wall] head-on: cargo front 0.000 m past the wall face, body 0.750 m back, deepest 0.024 m
+[wall] slide: moved 1.75 m along the wall, deepest 0.011 m
+[wall] turn: facing 71 deg from the wall normal, cargo front 0.000 m, deepest 0.007 m
+[wall] stop distance carrying 0.53 m, empty-handed 0.50 m
+[corridor] walked from z=-10.1 to z=-2.6 (exit -3.9), deepest 0.000 m
+[corridor] sideways attempts: deepest 0.000 m, facing 0 deg
+[corridor] dropped at (-10.20, 0.25, -5.45)
+Saving results to: C:/Users/azooo/AppData/LocalLow/DefaultCompany/CargoSquad\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

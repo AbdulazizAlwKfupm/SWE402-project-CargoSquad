@@ -1,6 +1,6 @@
 {
     "name": "CargoSquad.Tests",
-    "references": ["CargoSquad.Runtime", "Unity.InputSystem"],
+    "references": ["CargoSquad.Runtime", "Unity.InputSystem", "Unity.TextMeshPro"],
     "includePlatforms": ["Editor"],
     "optionalUnityReferences": ["TestAssemblies"]
 }
