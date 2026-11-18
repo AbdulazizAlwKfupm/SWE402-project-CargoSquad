@@ -62,7 +62,7 @@ namespace CargoSquad.Player
         {
             if (waitForRelease && Time.frameCount > blockedThroughFrame &&
                 (Mouse.current == null || !Mouse.current.leftButton.isPressed)) waitForRelease = false;
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) TryActivate();
+            if (Keyboard.current != null && Keyboard.current.qKey.wasPressedThisFrame) TryActivate();
             if (health.IsDead || (carrier && carrier.CarriedCargo)) CancelCharge();
         }
 

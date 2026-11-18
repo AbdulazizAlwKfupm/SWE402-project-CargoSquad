@@ -37,6 +37,7 @@ namespace CargoSquad.Tests
             InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
             EditorSceneManager.LoadSceneInPlayMode("Assets/_CargoSquad/Scenes/IndustrialDistrict.unity", new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null; yield return null;
             selection = Object.FindFirstObjectByType<CharacterSelection>();
             player = Object.FindFirstObjectByType<PlayerController>();
@@ -65,11 +66,11 @@ namespace CargoSquad.Tests
             InputSystem.QueueStateEvent(mouse, new MouseState { position = pos, buttons = 1 }); yield return null; yield return null;
             InputSystem.QueueStateEvent(mouse, new MouseState { position = pos }); yield return null; yield return null;
         }
-        private IEnumerator ClickWorld()
+        private IEnumerator PressAbility()
         {
-            InputSystem.QueueStateEvent(mouse, new MouseState { position = Vector2.zero, buttons = 1 });
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.Q));
             yield return null; yield return null;
-            InputSystem.QueueStateEvent(mouse, new MouseState { position = Vector2.zero });
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState());
             yield return null;
         }
         private IEnumerator Start(int index)
@@ -93,7 +94,7 @@ namespace CargoSquad.Tests
         private void CaptureInterface(string filename, int width, int height)
         {
             Directory.CreateDirectory("ValidationResults");
-            var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c => c.isRootCanvas && c.isActiveAndEnabled).ToArray();
+            var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c => c.isRootCanvas && c.isActiveAndEnabled && c.renderMode != RenderMode.WorldSpace).ToArray();
             var modes = canvases.Select(c => c.renderMode).ToArray();
             var cameras = canvases.Select(c => c.worldCamera).ToArray();
             var distances = canvases.Select(c => c.planeDistance).ToArray();
@@ -186,7 +187,7 @@ namespace CargoSquad.Tests
             tuning.FindProperty("medicCooldown").floatValue = .15f; tuning.ApplyModifiedPropertiesWithoutUndo();
             stamina.Tick(true, 1, 1); Assert.That(stamina.Current, Is.LessThan(100));
             InputSystem.QueueStateEvent(mouse, new MouseState { position = Vector2.zero }); yield return null; yield return null;
-            yield return ClickWorld(); Assert.That(stamina.Current, Is.EqualTo(100));
+            yield return PressAbility(); Assert.That(stamina.Current, Is.EqualTo(100));
             Assert.That(ability.IsCharging, Is.False); Assert.That(ability.TryActivate(), Is.False);
             Assert.That(ability.CooldownRemaining, Is.GreaterThan(0));
             yield return new WaitForSeconds(.2f);
@@ -253,7 +254,7 @@ namespace CargoSquad.Tests
         {
             yield return Start(0); OpenTestGround(); yield return new WaitForSeconds(.1f);
             var ability = player.GetComponent<CharacterAbility>();
-            yield return ClickWorld(); Assert.That(ability.CooldownRemaining, Is.GreaterThan(0f));
+            yield return PressAbility(); Assert.That(ability.CooldownRemaining, Is.GreaterThan(0f));
             yield return new WaitForSeconds(.5f);
             Assert.That(player.transform.position.z - 1000, Is.EqualTo(ability.ChargeDistance).Within(.2f));
             var so = new SerializedObject(ability); so.FindProperty("chargeCooldown").floatValue = .1f; so.ApplyModifiedPropertiesWithoutUndo();

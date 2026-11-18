@@ -27,6 +27,7 @@ namespace CargoSquad.Visuals
         private CargoInteractor carrier;
         private CargoCarrySocket carrySocket;
         private bool stowed;
+        private CargoSquad.Combat.PlayerWeapon combat;
 
         public Animator Animator => animator;
         public bool IsCarrying { get; private set; }
@@ -39,6 +40,7 @@ namespace CargoSquad.Visuals
             if (!animator)
                 animator = GetComponentInChildren<Animator>();
             body = GetComponentInParent<Rigidbody>();
+            combat = GetComponentInParent<CargoSquad.Combat.PlayerWeapon>();
             carrier = GetComponentInParent<CargoInteractor>();
             carrySocket = GetComponentInChildren<CargoCarrySocket>();
             if (animator)
@@ -50,9 +52,10 @@ namespace CargoSquad.Visuals
             Vector3 velocity = body ? body.linearVelocity : Vector3.zero;
             velocity.y = 0f;
             float speed = velocity.magnitude;
-            if (speed > 0.15f)
+            bool aiming = combat && combat.ControlsFacing;
+            if (speed > 0.15f || aiming)
             {
-                Quaternion target = Quaternion.LookRotation(velocity / speed, Vector3.up);
+                Quaternion target = Quaternion.LookRotation(aiming ? combat.AimDirection : velocity / speed, Vector3.up);
                 Quaternion next = Quaternion.RotateTowards(transform.rotation, target, turnSpeed * Time.deltaTime);
                 // Carried cargo must not be swung into a wall: the socket refuses turns that have no room.
                 if (!carrySocket || (carrySocket.CanTurnAlong(transform, target) && carrySocket.CanTurnTo(transform, next)))

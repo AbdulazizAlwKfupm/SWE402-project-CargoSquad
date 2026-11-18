@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8461502fff35417fa2ba7f667e809ef9, type: 3}
+  m_Name: HeavyShotgun
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.WeaponDefinition
+  type: 0
+  displayName: SHOTGUN
+  damage: 12
+  range: 5
+  coneAngle: 60
+  shotsPerSecond: 1.25
+  automatic: 0
+  magazineCapacity: 5
+  reserveAmmunition: 20
+  reloadDuration: 1.6
+  pelletCount: 7
+  spreadPattern: 0
+  endRangeDamageMultiplier: 0.35
+  noiseRadius: 20
+  stunDuration: 0
+  supportsCarrying: 1
+  carryingSpreadMultiplier: 1.5
+  sprintSpreadMultiplier: 1.2
+  effectColor: {r: 1, g: 0.75, b: 0.35, a: 1}
+  fireClip: {fileID: 0}
+  emptyClip: {fileID: 0}
+  reloadClip: {fileID: 0}
+  volume: 0.5

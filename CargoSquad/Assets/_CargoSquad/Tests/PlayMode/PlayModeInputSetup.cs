@@ -4,6 +4,15 @@ using UnityEngine.InputSystem;
 
 namespace CargoSquad.Tests
 {
+    internal static class MissionResultTestSupport
+    {
+        // Legacy mechanics tests continue simulating after terminal states. Result UI/pause is covered separately.
+        public static void KeepSimulationRunning()
+        {
+            foreach (var panel in UnityEngine.Object.FindObjectsByType<CargoSquad.UI.MissionResultPanel>(UnityEngine.FindObjectsSortMode.None))
+                panel.enabled = false;
+        }
+    }
     // The editor has no focused Game view in batch mode. Send simulated input to gameplay consistently.
     [SetUpFixture]
     public sealed class PlayModeInputSetup

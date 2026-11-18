@@ -73,6 +73,7 @@ namespace CargoSquad.UI
             player.GetComponent<Health>().ResetMaximum(definition.MaxHealth);
             player.GetComponent<CargoInteractor>().SetCarrySocket(ActiveVisual.GetComponentInChildren<CargoCarrySocket>());
             player.GetComponent<CharacterAbility>().Configure((SurvivorKind)SelectedIndex, ActiveVisual);
+            player.GetComponent<PlayerWeapon>()?.Equip((SurvivorKind)SelectedIndex, ActiveVisual);
             HasStarted = true;
             selectionPanel.SetActive(false);
             abilityStatus.transform.parent.gameObject.SetActive(true);
@@ -89,7 +90,7 @@ namespace CargoSquad.UI
             string name = SelectedIndex == 0 ? "HEAVY  /  SHOULDER BASH" : "MEDIC  /  SECOND WIND";
             string state = player.GetComponent<Health>().IsDead ? "Unavailable / downed" :
                 player.GetComponent<CargoInteractor>().CarriedCargo ? "Unavailable / carrying cargo" :
-                ability.CooldownRemaining > 0f ? $"Ready in {ability.CooldownRemaining:0.0}s" : "LEFT MOUSE  /  Ready";
+                ability.CooldownRemaining > 0f ? $"Ready in {ability.CooldownRemaining:0.0}s" : "Q  /  Ready";
             abilityTitle.text = name;
             abilityStatus.text = state;
         }
@@ -153,7 +154,7 @@ namespace CargoSquad.UI
             StartButton = start.gameObject.AddComponent<Button>(); StartButton.targetGraphic = start;
             Label("StartLabel", start.transform, "", new Vector2(320, 55), Vector2.zero, 21, Ink);
             StartButton.onClick.AddListener(StartSelectedCharacter);
-            Label("Controls", content, "WASD  Move     /     SHIFT  Sprint     /     E  Cargo     /     LEFT MOUSE  Ability", new Vector2(950, 30), new Vector2(0, -342), 16, Muted);
+            Label("Controls", content, "WASD Move / SHIFT Sprint / E Cargo / Q Ability / HOLD LMB Aim / RELEASE Fire / R Reload", new Vector2(1000, 30), new Vector2(0, -342), 16, Muted);
             var hud = Panel("AbilityStatus", canvasObject.transform, new Vector2(370, 88), Vector2.zero, new Color(.035f,.055f,.075f,.9f), true);
             hud.rectTransform.anchorMin = hud.rectTransform.anchorMax = Vector2.one;
             hud.rectTransform.pivot = Vector2.one; hud.rectTransform.anchoredPosition = new Vector2(-14, -14);

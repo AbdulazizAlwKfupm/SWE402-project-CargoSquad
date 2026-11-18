@@ -31,6 +31,7 @@ namespace CargoSquad.Tests
         public IEnumerator NavyVisualWorksWithExistingMovementAndCargoLoop()
         {
             EditorSceneManager.LoadSceneInPlayMode(Scene, new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             yield return null;
             var player = Object.FindFirstObjectByType<CargoInteractor>();

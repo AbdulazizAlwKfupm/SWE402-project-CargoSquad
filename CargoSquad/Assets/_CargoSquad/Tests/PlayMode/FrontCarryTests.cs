@@ -31,7 +31,11 @@ namespace CargoSquad.Tests
         public IEnumerator IndustrialDistrict_PickupFrontCarryDropSlipAndExtraction()
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
+            // This long visual/cargo regression predates combat. Bite integration is covered separately.
+            foreach (var enemy in Object.FindObjectsByType<CargoSquad.AI.MutatedWolfAI>(FindObjectsSortMode.None))
+                enemy.enabled = false;
             Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;
             var player = Object.FindFirstObjectByType<CargoInteractor>();
@@ -72,7 +76,8 @@ namespace CargoSquad.Tests
                 // --- movement
                 Vector3 start = body.position;
                 InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.D));
-                yield return new WaitForSeconds(0.6f);
+                // Count simulated physics steps so screenshot stalls do not shorten the movement interval.
+                for (int step = 0; step < 60; step++) yield return new WaitForFixedUpdate();
                 Assert.That(body.position.x, Is.GreaterThan(start.x + 1f));
                 Assert.That(Vector3.Angle(visual.transform.forward, Vector3.right), Is.LessThan(10f));
                 Assert.That(animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion"), Is.True);
@@ -199,6 +204,7 @@ namespace CargoSquad.Tests
         public IEnumerator IndustrialDistrict_EverySurvivorCarriesOnItsOwnSocket()
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;
@@ -250,6 +256,7 @@ namespace CargoSquad.Tests
         public IEnumerator Lineup_AllSurvivorsHoldTheSameCargoWithHandIk()
         {
             EditorSceneManager.LoadSceneInPlayMode(LineupScene, new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             yield return null;
             Transform lineup = GameObject.Find("Front Carry Lineup").transform;

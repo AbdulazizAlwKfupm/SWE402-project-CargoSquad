@@ -1,4 +1,5 @@
 using System;
+using CargoSquad.Combat;
 using CargoSquad.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,6 +30,7 @@ namespace CargoSquad.Cargo
         private CapsuleCollider capsule;
         private InputAction interact;
         private bool dropBlocked;
+        private Health health;
 
         private CargoItem carriedCargo;
         private CargoCarrySocket activeSocket;
@@ -45,11 +47,15 @@ namespace CargoSquad.Cargo
                     activeSocket.Release();
                     activeSocket = null;
                 }
+                CarriedCargoChanged?.Invoke(carriedCargo);
             }
         }
         public CargoGrip Grip { get; private set; }
         public bool HasPendingSlip => Grip && CarriedCargo && Grip.SlipPending;
         public event Action<GameplayNoise> NoiseEmitted;
+        public void EmitNoise(GameplayNoise noise) => NoiseEmitted?.Invoke(noise);
+        public event Action<CargoItem> CarriedCargoChanged;
+        public event Action<CargoItem> CargoDropped;
         public string Prompt { get; private set; }
 
         public void SetCarrySocket(CargoCarrySocket socket)
@@ -61,6 +67,7 @@ namespace CargoSquad.Cargo
         private void Awake()
         {
             capsule = GetComponent<CapsuleCollider>();
+            health = GetComponent<Health>();
             Grip = GetComponent<CargoGrip>();
             var binding = inputActions ? inputActions.FindAction("Player/Interact") : null;
             if (binding == null || !cargo || !ground)
@@ -84,6 +91,14 @@ namespace CargoSquad.Cargo
 
         private void Update()
         {
+            if (health && health.IsDead)
+            {
+                // Finish a pending damage consequence, while blocking player input.
+                if (CarriedCargo && CarriedCargo.IsDestroyed) DiscardDestroyedCargo();
+                else if (HasPendingSlip) TryResolveSlip();
+                Prompt = null;
+                return;
+            }
             var ability = GetComponent<CharacterAbility>();
             if (ability && ability.IsCharging) return;
             bool pressed = interact.WasPressedThisFrame();
@@ -91,9 +106,7 @@ namespace CargoSquad.Cargo
             {
                 if (CarriedCargo.IsDestroyed)
                 {
-                    CarriedCargo.Discard();
-                    CarriedCargo = null;
-                    Prompt = null;
+                    DiscardDestroyedCargo();
                     return;
                 }
                 if (HasPendingSlip)
@@ -134,12 +147,33 @@ namespace CargoSquad.Cargo
 
         public void TickGrip(bool sprinting, bool moving, CharacterDefinition character, float seconds)
         {
-            if (!Grip || !CarriedCargo || CarriedCargo.IsDestroyed || !CarriedCargo.Definition)
+            if ((health && health.IsDead) || !Grip || !CarriedCargo || CarriedCargo.IsDestroyed || !CarriedCargo.Definition)
                 return;
 
             float strength = character ? character.CarryStrength : 1f;
             float stability = character ? character.CargoStability : 1f;
             Grip.Tick(sprinting, moving, CarriedCargo.Definition.GripDrainMultiplier(strength, stability), seconds);
+        }
+
+        /// <summary>Resolve one already-validated hit against the cargo held at its impact instant.</summary>
+        public void ApplyCarriedImpact(CargoItem expectedCargo, float conditionDamage, float gripLoss)
+        {
+            if (!expectedCargo || expectedCargo != CarriedCargo || !expectedCargo.IsCarried ||
+                expectedCargo.IsDelivered || expectedCargo.IsDestroyed || !expectedCargo.Condition) return;
+
+            expectedCargo.Condition.ApplyDamage(conditionDamage);
+            Grip?.ApplyLoss(gripLoss);
+            if (expectedCargo.IsDestroyed)
+                DiscardDestroyedCargo();
+            else if (HasPendingSlip)
+                TryResolveSlip();
+        }
+
+        private void DiscardDestroyedCargo()
+        {
+            CarriedCargo.Discard();
+            CarriedCargo = null;
+            Prompt = null;
         }
 
         private void TryResolveSlip()
@@ -150,6 +184,7 @@ namespace CargoSquad.Cargo
 
             slippingCargo.Condition.ApplyDamage(slippingCargo.Definition.SlipDamage);
             NoiseEmitted?.Invoke(new GameplayNoise(slippingCargo.transform.position, slipNoiseRadius));
+            if (slippingCargo.IsDestroyed) slippingCargo.Discard();
         }
 
         private CargoItem FindCargoInReach()
@@ -221,8 +256,10 @@ namespace CargoSquad.Cargo
                     continue;
                 }
 
-                CarriedCargo.DropAt(center);
+                CargoItem dropped = CarriedCargo;
+                dropped.DropAt(center);
                 CarriedCargo = null;
+                CargoDropped?.Invoke(dropped);
                 return true;
             }
 
@@ -231,7 +268,8 @@ namespace CargoSquad.Cargo
 
         public bool TryDeliver(CargoItem primaryCargo)
         {
-            if (!primaryCargo || primaryCargo.IsDestroyed || CarriedCargo != primaryCargo || HasPendingSlip)
+            if ((health && health.IsDead) || !isActiveAndEnabled || !primaryCargo ||
+                primaryCargo.IsDestroyed || CarriedCargo != primaryCargo || HasPendingSlip)
                 return false;
 
             primaryCargo.Deliver();

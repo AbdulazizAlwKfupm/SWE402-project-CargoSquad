@@ -129,6 +129,7 @@ namespace CargoSquad.Tests
         private static IEnumerator Load(Rig rig)
         {
             EditorSceneManager.LoadSceneInPlayMode(GameScene, new LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             yield return null;

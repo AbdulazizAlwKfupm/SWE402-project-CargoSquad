@@ -31,6 +31,13 @@ namespace CargoSquad.Cargo
             SetPercent(Mathf.Clamp(Percent + rate * seconds, 0f, 100f));
         }
 
+        /// <summary>Instant percentage-point loss. The normal pending-slip flow owns dropping and placement.</summary>
+        public void ApplyLoss(float amount)
+        {
+            if (SlipPending || !float.IsFinite(amount) || amount <= 0f) return;
+            SetPercent(Mathf.Max(0f, Percent - amount));
+        }
+
         private void SetPercent(float percent)
         {
             SlipPending = percent <= 0f;

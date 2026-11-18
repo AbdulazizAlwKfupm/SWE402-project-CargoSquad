@@ -21,6 +21,7 @@ namespace CargoSquad.Tests
         public IEnumerator StaminaAndSceneCargoLoop()
         {
             EditorSceneManager.LoadSceneInPlayMode(Scene, new UnityEngine.SceneManagement.LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             var player = Object.FindFirstObjectByType<CargoInteractor>();
@@ -111,6 +112,7 @@ namespace CargoSquad.Tests
         public IEnumerator SharedDefinitionKeepsIndependentConditionAndDestroyedCargoAllowsEscape()
         {
             EditorSceneManager.LoadSceneInPlayMode(Scene, new UnityEngine.SceneManagement.LoadSceneParameters());
+            yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null;
             Object.FindFirstObjectByType<CargoSquad.UI.CharacterSelection>()?.StartSelectedCharacter();
             var cargo = Object.FindFirstObjectByType<CargoItem>();
