@@ -10,6 +10,13 @@
 /CargoSquad/[Mm]emoryCaptures/
 /CargoSquad/[Rr]ecordings/
 
+# Local IndustrialExpansion review captures, test output and recordings.
+/CargoSquad/ValidationResults/
+/CargoSquad/Docs/Validation/IndustrialExpansion/
+/CargoSquad/Docs/Validation/IndustrialExpansionPolish/
+/CargoSquad/Docs/Validation/IndustrialExpansionComfort/
+/CargoSquad/Docs/Validation/IndustrialExpansionEvening/
+
 # Addressables build output, when generated.
 /CargoSquad/[Aa]ssets/StreamingAssets/aa/
 /CargoSquad/[Aa]ssets/StreamingAssets/aa.meta
