@@ -2039,6 +2039,7 @@ MonoBehaviour:
   fullSpeedReference: 3
   maxPlaybackSpeed: 1
   speedDamping: 0.06
+  definition: {fileID: 11400000, guid: a9d4df2d2fbc7644c87cd691858e4195, type: 2}
 --- !u!114 &5675666494599348039
 MonoBehaviour:
   m_ObjectHideFlags: 0

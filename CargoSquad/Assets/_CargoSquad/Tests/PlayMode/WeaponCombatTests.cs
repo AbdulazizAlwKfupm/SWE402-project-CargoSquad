@@ -103,6 +103,17 @@ namespace CargoSquad.Tests
             yield return null; yield return null;
         }
         [UnityTest]
+        public IEnumerator CharacterInspectorDamageStrengthScalesWeaponAndBash()
+        {
+            yield return Deploy(1);
+            var stamina=body.GetComponent<PlayerStamina>(); var character=Object.Instantiate(stamina.Definition); created.Add(character);
+            var data=new SerializedObject(character); data.FindProperty("damageStrength").floatValue=2f; data.ApplyModifiedPropertiesWithoutUndo(); stamina.SetDefinition(character);
+            weapon.Definition.damage=6; weapon.Definition.endRangeDamageMultiplier=1;
+            var target=Target(body.position+Vector3.forward*3,new Vector3(8,2,.2f)); Physics.SyncTransforms();
+            Assert.That(weapon.TryFire(),Is.True); Assert.That(target.Current,Is.EqualTo(988));
+            Assert.That(body.GetComponent<CharacterAbility>().ChargeDamage,Is.EqualTo(70));
+        }
+        [UnityTest]
         public IEnumerator HeavyCursorConeMouseFirePelletsAmmoAndRate()
         {
             yield return Deploy(0);

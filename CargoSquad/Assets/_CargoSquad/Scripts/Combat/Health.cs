@@ -25,6 +25,16 @@ namespace CargoSquad.Combat
             Current = maximum;
             Changed?.Invoke(Current, Maximum);
         }
+        // Healing never revives a dead survivor or exceeds the existing maximum.
+        public float Restore(float amount)
+        {
+            if (IsDead || !float.IsFinite(amount) || amount <= 0f) return 0f;
+            float restored = Mathf.Min(amount, Maximum - Current);
+            if (restored <= 0f) return 0f;
+            Current += restored; Changed?.Invoke(Current, Maximum);
+            return restored;
+        }
+
         public void ApplyDamage(float damage) => ApplyDamage(damage, null, Vector3.zero);
 
         public void ApplyDamage(float damage, Vector3? point, Vector3 normal)

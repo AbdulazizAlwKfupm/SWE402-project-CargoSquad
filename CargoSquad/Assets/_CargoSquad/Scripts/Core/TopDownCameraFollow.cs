@@ -11,12 +11,16 @@ namespace CargoSquad
         [SerializeField] private Vector3 offset = new Vector3(0f, 22f, -22f);
         [SerializeField, Min(0.01f)] private float smoothTime = 0.18f;
 
+        [SerializeField, Tooltip("Keep the survivor clear of the HUD when the map edge stops normal camera follow.")]
+        private Rect safeViewport = new Rect(.08f, .24f, .84f, .68f);
+        private Collider targetCollider;
         private Camera view;
         private Vector2 followVelocity;
 
         private void Awake()
         {
             view = GetComponent<Camera>();
+            if (target) targetCollider = target.GetComponent<Collider>();
         }
 
         private void OnEnable()
@@ -55,6 +59,26 @@ namespace CargoSquad
         {
             float floor = playArea ? playArea.bounds.max.y : 0f;
             transform.position = new Vector3(focus.x, floor, focus.y) + offset;
+            KeepSurvivorVisible();
+        }
+
+        private void KeepSurvivorVisible()
+        {
+            if (!view || !target || !view.orthographic) return;
+            // Protect the feet, rather than just the Rigidbody origin halfway up the body.
+            Vector3 feet = target.position;
+            if (targetCollider) feet.y = targetCollider.bounds.min.y;
+            Vector3 point = view.WorldToViewportPoint(feet);
+            float dx = point.x - Mathf.Clamp(point.x, safeViewport.xMin, safeViewport.xMax);
+            float dy = point.y - Mathf.Clamp(point.y, safeViewport.yMin, safeViewport.yMax);
+            Vector3 right = transform.right, up = transform.up;
+            float determinant = right.x * up.z - right.z * up.x;
+            if (Mathf.Abs(determinant) < .001f) return;
+            // Solve the horizontal camera translation in screen space, preserving height and pitch.
+            float horizontal = dx * 2f * view.orthographicSize * view.aspect;
+            float vertical = dy * 2f * view.orthographicSize;
+            transform.position += new Vector3((horizontal * up.z - right.z * vertical) / determinant, 0f,
+                (right.x * vertical - horizontal * up.x) / determinant);
         }
 
         private static float ClampToMap(float focus, float center, float travel)

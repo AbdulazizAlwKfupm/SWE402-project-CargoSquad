@@ -1,4 +1,5 @@
 using CargoSquad.Cargo;
+using CargoSquad.Player;
 using UnityEngine;
 
 namespace CargoSquad.Visuals
@@ -11,6 +12,10 @@ namespace CargoSquad.Visuals
     [DisallowMultipleComponent]
     public sealed class SurvivorVisual : MonoBehaviour
     {
+        [SerializeField, Tooltip("Saved stats for this character only. Edited inline in this Inspector; applied when deployed.")]
+        private CharacterDefinition definition;
+        public CharacterDefinition Definition => definition;
+
         private static readonly int SpeedParameter = Animator.StringToHash("Speed");
         private static readonly int CarryingParameter = Animator.StringToHash("Carrying");
 

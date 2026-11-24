@@ -17,17 +17,18 @@ namespace CargoSquad.UI
         [SerializeField] private PlayerController player;
         [SerializeField] private SurvivorVisual heavy;
         [SerializeField] private SurvivorVisual medic;
-        [SerializeField] private CharacterDefinition heavyDefinition;
-        [SerializeField] private CharacterDefinition medicDefinition;
+        [SerializeField, HideInInspector] private CharacterDefinition heavyDefinition;
+        [SerializeField, HideInInspector] private CharacterDefinition medicDefinition;
         [SerializeField] private CargoMissionOverlay gameplayOverlay;
+        [SerializeField, Tooltip("Preview: first-person base. Disable to restore the original two-card selection UI.")] private bool useBaseSelection = true;
+        private BaseCharacterSelection basePreview;
+        public BaseCharacterSelection BasePreview => basePreview;
         private GameObject selectionPanel;
         private GameObject canvasObject;
         private GameObject ownedEventSystem;
         private Image[] cardImages;
         private Outline[] outlines;
         private TMP_Text[] selectedLabels;
-        private TMP_Text abilityStatus;
-        private TMP_Text abilityTitle;
         private float previousTimeScale;
         private bool ownsPause;
         private static readonly Color Ink = new Color(0.035f, 0.055f, 0.075f);
@@ -35,7 +36,7 @@ namespace CargoSquad.UI
         private static readonly Color Mint = new Color(0.52f, 0.94f, 0.72f);
         public int SelectedIndex { get; private set; }
         public bool HasStarted { get; private set; }
-        public Button StartButton { get; private set; }
+        public Button StartButton { get; internal set; }
         public Button[] Cards { get; private set; }
         public SurvivorVisual ActiveVisual => SelectedIndex == 0 ? heavy : medic;
 
@@ -47,27 +48,34 @@ namespace CargoSquad.UI
             player.GetComponent<CargoInteractor>().enabled = false;
             heavy.gameObject.SetActive(false); medic.gameObject.SetActive(false);
             if (gameplayOverlay) gameplayOverlay.enabled = false;
-            BuildInterface(); SelectCharacter(0);
+            if (useBaseSelection)
+            {
+                basePreview = gameObject.AddComponent<BaseCharacterSelection>();
+                basePreview.Initialize(this, heavy, medic);
+            }
+            else BuildInterface();
+            EnsureEventSystem(); SelectCharacter(0);
         }
 
         public void SelectCharacter(int index)
         {
             if (HasStarted || index < 0 || index > 1) return;
             SelectedIndex = index;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; cardImages != null && i < 2; i++)
             {
                 cardImages[i].color = i == index ? new Color(0.09f, 0.17f, 0.18f) : new Color(0.075f, 0.095f, 0.12f);
                 outlines[i].enabled = i == index;
                 selectedLabels[i].text = i == index ? "SELECTED" : "SELECT SPECIALIST";
                 selectedLabels[i].color = i == index ? Mint : Muted;
             }
-            StartButton.GetComponentInChildren<TMP_Text>().text = "START AS " + (index == 0 ? "HEAVY" : "MEDIC");
+            if (basePreview) basePreview.RefreshSelection();
+            if (StartButton) StartButton.GetComponentInChildren<TMP_Text>().text = "START AS " + (index == 0 ? "HEAVY" : "MEDIC");
         }
 
         public void StartSelectedCharacter()
         {
             if (HasStarted) return;
-            var definition = SelectedIndex == 0 ? heavyDefinition : medicDefinition;
+            var definition = ActiveVisual.Definition ? ActiveVisual.Definition : SelectedIndex == 0 ? heavyDefinition : medicDefinition;
             heavy.gameObject.SetActive(SelectedIndex == 0); medic.gameObject.SetActive(SelectedIndex == 1);
             var stamina = player.GetComponent<PlayerStamina>(); stamina.SetDefinition(definition);
             player.GetComponent<Health>().ResetMaximum(definition.MaxHealth);
@@ -75,24 +83,25 @@ namespace CargoSquad.UI
             player.GetComponent<CharacterAbility>().Configure((SurvivorKind)SelectedIndex, ActiveVisual);
             player.GetComponent<PlayerWeapon>()?.Equip((SurvivorKind)SelectedIndex, ActiveVisual);
             HasStarted = true;
-            selectionPanel.SetActive(false);
-            abilityStatus.transform.parent.gameObject.SetActive(true);
+            if (selectionPanel) selectionPanel.SetActive(false);
+            if (basePreview) basePreview.Close();
             player.enabled = true; player.GetComponent<CargoInteractor>().enabled = true;
             if (gameplayOverlay) gameplayOverlay.enabled = true;
             Time.timeScale = previousTimeScale > 0f ? previousTimeScale : 1f; ownsPause = false;
             EventSystem.current?.SetSelectedGameObject(null);
         }
 
-        private void Update()
+        public void ShowClassicSelection()
         {
-            if (!HasStarted) return;
-            var ability = player.GetComponent<CharacterAbility>();
-            string name = SelectedIndex == 0 ? "HEAVY  /  SHOULDER BASH" : "MEDIC  /  SECOND WIND";
-            string state = player.GetComponent<Health>().IsDead ? "Unavailable / downed" :
-                player.GetComponent<CargoInteractor>().CarriedCargo ? "Unavailable / carrying cargo" :
-                ability.CooldownRemaining > 0f ? $"Ready in {ability.CooldownRemaining:0.0}s" : "Q  /  Ready";
-            abilityTitle.text = name;
-            abilityStatus.text = state;
+            if (HasStarted || !basePreview) return;
+            basePreview.Close(); Destroy(basePreview); basePreview = null;
+            useBaseSelection = false; BuildInterface(); SelectCharacter(SelectedIndex);
+        }
+        private void EnsureEventSystem()
+        {
+            if (EventSystem.current) return;
+            ownedEventSystem = new GameObject("DeploymentEventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+            ownedEventSystem.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();
         }
 
         private RectTransform Rect(string name, Transform parent, Vector2 size, Vector2 position)
@@ -155,20 +164,10 @@ namespace CargoSquad.UI
             Label("StartLabel", start.transform, "", new Vector2(320, 55), Vector2.zero, 21, Ink);
             StartButton.onClick.AddListener(StartSelectedCharacter);
             Label("Controls", content, "WASD Move / SHIFT Sprint / E Cargo / Q Ability / HOLD LMB Aim / RELEASE Fire / R Reload", new Vector2(1000, 30), new Vector2(0, -342), 16, Muted);
-            var hud = Panel("AbilityStatus", canvasObject.transform, new Vector2(370, 88), Vector2.zero, new Color(.035f,.055f,.075f,.9f), true);
-            hud.rectTransform.anchorMin = hud.rectTransform.anchorMax = Vector2.one;
-            hud.rectTransform.pivot = Vector2.one; hud.rectTransform.anchoredPosition = new Vector2(-14, -14);
-            abilityTitle = Label("AbilityTitle", hud.transform, "", new Vector2(344, 26), new Vector2(0, 23), 16, Muted);
-            abilityStatus = Label("AbilityText", hud.transform, "", new Vector2(344, 43), new Vector2(0, -13), 24, Mint);
-            hud.gameObject.SetActive(false);
-            if (!EventSystem.current)
-            {
-                ownedEventSystem = new GameObject("DeploymentEventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
-                ownedEventSystem.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();
-            }
         }
         private void OnDestroy()
         {
+            if (basePreview) basePreview.Close();
             if (ownsPause) Time.timeScale = previousTimeScale;
             if (ownedEventSystem) Destroy(ownedEventSystem);
         }

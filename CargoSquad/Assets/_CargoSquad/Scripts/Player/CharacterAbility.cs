@@ -38,10 +38,11 @@ namespace CargoSquad.Player
 
         public SurvivorKind Kind { get; private set; }
         public bool IsCharging => remaining > 0f;
+        public float CooldownDuration => Kind == SurvivorKind.Heavy ? chargeCooldown : medicCooldown;
         public float CooldownRemaining => Mathf.Max(0f, readyAt - Time.time);
         public float ChargeDistance => chargeDistance;
         public float ChargeSpeed => chargeSpeed;
-        public float ChargeDamage => chargeDamage;
+        public float ChargeDamage => chargeDamage * (stamina && stamina.Definition ? stamina.Definition.DamageStrength : 1f);
 
         private void Awake()
         {
@@ -132,9 +133,9 @@ namespace CargoSquad.Player
                 var hit = nearest.Value;
                 var target = hit.collider.GetComponentInParent<IDamageable>();
                 if (target is Health healthTarget)
-                    healthTarget.ApplyDamage(chargeDamage, hit.distance > 0f ? hit.point : null,
+                    healthTarget.ApplyDamage(ChargeDamage, hit.distance > 0f ? hit.point : null,
                         hit.distance > 0f ? hit.normal : -direction);
-                else target?.ApplyDamage(chargeDamage);
+                else target?.ApplyDamage(ChargeDamage);
                 remaining = 0f;
             }
             else remaining = Mathf.Max(0f, remaining - step);

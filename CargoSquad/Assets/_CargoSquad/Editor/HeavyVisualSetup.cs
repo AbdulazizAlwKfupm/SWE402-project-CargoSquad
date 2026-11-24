@@ -107,6 +107,9 @@ namespace CargoSquad.Editor
                 var cargo = Socket("CargoMount_Front", root.transform, new Vector3(0, 1.1f, 0.3f), Quaternion.identity)
                     .gameObject.AddComponent<CargoCarrySocket>();
                 var visual = root.AddComponent<SurvivorVisual>();
+                if (prefix == "HV4_J_" || prefix == "MR1_J_")
+                    Reference(visual, "definition", AssetDatabase.LoadAssetAtPath<CargoSquad.Player.CharacterDefinition>(
+                        "Assets/_CargoSquad/ScriptableObjects/Characters/" + (prefix == "HV4_J_" ? "Heavy" : "Medic Soldier") + ".asset"));
                 Reference(visual, "animator", animator); Reference(visual, "weapon", gun);
                 Reference(visual, "handSocket", handSocket); Reference(visual, "stowSocket", back);
                 // Preserve the visual timing/tuning from the existing Heavy scene instance.

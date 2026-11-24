@@ -22,6 +22,7 @@ namespace CargoSquad.Combat
         private CargoInteractor carrier;
         private CharacterAbility ability;
         private PlayerController movement;
+        private PlayerStamina stamina;
         private CargoSquad.Missions.CargoExtraction mission;
         private SurvivorVisual visual;
         private AimingConeIndicator cone;
@@ -64,7 +65,7 @@ namespace CargoSquad.Combat
         private void Awake()
         {
             health = GetComponent<Health>(); carrier = GetComponent<CargoInteractor>();
-            ability = GetComponent<CharacterAbility>(); movement = GetComponent<PlayerController>();
+            ability = GetComponent<CharacterAbility>(); movement = GetComponent<PlayerController>(); stamina = GetComponent<PlayerStamina>();
             mission = FindFirstObjectByType<CargoSquad.Missions.CargoExtraction>();
             if (!aimCamera) aimCamera = Camera.main;
             random = new System.Random(spreadSeed);
@@ -253,7 +254,8 @@ namespace CargoSquad.Combat
                 {
                     var hit = nearest.Value; end = hit.point;
                     var target = hit.collider.GetComponentInParent<IDamageable>();
-                    float damage = Definition.damage * Mathf.Lerp(1, Definition.endRangeDamageMultiplier, hit.distance / Definition.range);
+                    float strength = stamina && stamina.Definition ? stamina.Definition.DamageStrength : 1f;
+                    float damage = Definition.damage * strength * Mathf.Lerp(1, Definition.endRangeDamageMultiplier, hit.distance / Definition.range);
                     var healthTarget = target as Health;
                     bool hasDamageFeedback = healthTarget && healthTarget.HasDamageFeedback;
                     if (healthTarget) healthTarget.ApplyDamage(damage, hit.point, hit.normal);

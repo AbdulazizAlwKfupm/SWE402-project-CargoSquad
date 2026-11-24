@@ -40,6 +40,7 @@ namespace CargoSquad.Tests
             yield return null; MissionResultTestSupport.KeepSimulationRunning();
             yield return null; yield return null;
             selection = Object.FindFirstObjectByType<CharacterSelection>();
+            selection.ShowClassicSelection(); yield return null;
             player = Object.FindFirstObjectByType<PlayerController>();
             // Disabled components are excluded by FindFirstObjectByType in some Unity versions.
             if (!player) player = GameObject.Find("PlayerPlaceholder").GetComponent<PlayerController>();
@@ -91,16 +92,17 @@ namespace CargoSquad.Tests
             InputSystem.QueueStateEvent(keyboard, new KeyboardState(keys)); yield return new WaitForSeconds(seconds);
         }
         private void CaptureSelection() => CaptureInterface("character-selection.png", 1280, 800);
-        private void CaptureInterface(string filename, int width, int height)
+        private void CaptureInterface(string filename, int width, int height, bool includeWorld = false)
         {
             Directory.CreateDirectory("ValidationResults");
             var canvases = Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).Where(c => c.isRootCanvas && c.isActiveAndEnabled && c.renderMode != RenderMode.WorldSpace).ToArray();
             var modes = canvases.Select(c => c.renderMode).ToArray();
             var cameras = canvases.Select(c => c.worldCamera).ToArray();
             var distances = canvases.Select(c => c.planeDistance).ToArray();
-            var cameraObject = new GameObject("SelectionCaptureCamera");
-            var camera = cameraObject.AddComponent<Camera>(); camera.cullingMask = 1 << 5;
-            camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = new Color(.035f, .055f, .075f);
+            var cameraObject = includeWorld ? null : new GameObject("SelectionCaptureCamera");
+            var camera = includeWorld ? Camera.main : cameraObject.AddComponent<Camera>();
+            if (!includeWorld) { camera.cullingMask = 1 << 5; camera.clearFlags = CameraClearFlags.SolidColor; camera.backgroundColor = new Color(.035f, .055f, .075f); }
+            var oldTarget = camera.targetTexture;
             var target = new RenderTexture(width, height, 24); target.Create(); camera.targetTexture = target;
             foreach (var canvas in canvases) { canvas.renderMode = RenderMode.ScreenSpaceCamera; canvas.worldCamera = camera; canvas.planeDistance = 1f; }
             Canvas.ForceUpdateCanvases(); camera.Render();
@@ -110,7 +112,7 @@ namespace CargoSquad.Tests
             File.WriteAllBytes("ValidationResults/" + filename, image.EncodeToPNG());
             RenderTexture.active = previous;
             for (int i = 0; i < canvases.Length; i++) { canvases[i].renderMode = modes[i]; canvases[i].worldCamera = cameras[i]; canvases[i].planeDistance = distances[i]; }
-            Object.Destroy(image); camera.targetTexture = null; target.Release(); Object.Destroy(target); Object.Destroy(cameraObject);
+            Object.Destroy(image); camera.targetTexture = oldTarget; target.Release(); Object.Destroy(target); if (cameraObject) Object.Destroy(cameraObject);
         }
         [UnityTest]
         public IEnumerator HologramsUseDifferentActualHeadsRotateWhilePausedAndDisposeOnStart()
@@ -139,15 +141,85 @@ namespace CargoSquad.Tests
             Assert.That(player.GetComponents<Rigidbody>().Length, Is.EqualTo(1));
         }
 
+        [UnityTest] public IEnumerator HeavySouthEdgeStaysGroundedAndVisible() => CheckSouthEdge(0);
+        [UnityTest] public IEnumerator MedicSouthEdgeStaysGroundedAndVisible() => CheckSouthEdge(1);
+        private IEnumerator CheckSouthEdge(int index)
+        {
+            yield return Start(index);
+            foreach (var wolf in Object.FindObjectsByType<CargoSquad.AI.MutatedWolfAI>(FindObjectsSortMode.None)) wolf.enabled = false;
+            var body = player.GetComponent<Rigidbody>();
+            var ground = GameObject.Find("Ground").GetComponent<BoxCollider>().bounds;
+            var capsule = player.GetComponent<CapsuleCollider>();
+            var probeObject = new GameObject("SouthVisibilityProbe"); created.Add(probeObject);
+            var probe = probeObject.AddComponent<SouthEdgeVisibilityProbe>(); probe.Capsule = capsule; probe.View = Camera.main;
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState(Key.S, Key.LeftShift));
+            float until = Time.time + 4f;
+            while (Time.time < until)
+            {
+                yield return null;
+                Assert.That(body.position.y, Is.GreaterThan(.8f), "Player fell off the ground.");
+                Assert.That(probe.MinimumViewportY, Is.GreaterThanOrEqualTo(.239f), "Player hidden behind lower HUD after camera LateUpdate.");
+            }
+            InputSystem.QueueStateEvent(keyboard, new KeyboardState()); yield return null;
+            Assert.That(body.position.z, Is.GreaterThan(ground.min.z));
+            Assert.That(body.position.z, Is.LessThan(ground.min.z + 1f), "Reached the real south-edge collision.");
+            Assert.That(selection.ActiveVisual.GetComponentsInChildren<Renderer>().Any(r => r.enabled && GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(Camera.main), r.bounds)), Is.True);
+            CaptureInterface(index == 0 ? "heavy-south-edge.png" : "medic-south-edge.png", 1280, 800, true);
+        }
+
+        [UnityTest] public IEnumerator HeavyHudTracksLiveVitalsAndCooldown() => CheckSurvivorHud(0);
+        [UnityTest] public IEnumerator MedicHudTracksLiveVitalsAndCooldown() => CheckSurvivorHud(1);
+        private IEnumerator CheckSurvivorHud(int index)
+        {
+            yield return Start(index); OpenTestGround();
+            var hud = Object.FindFirstObjectByType<SurvivorHud>();
+            var hp = player.GetComponent<Health>();
+            var energy = player.GetComponent<PlayerStamina>();
+            var power = player.GetComponent<CharacterAbility>();
+            Assert.That(hud, Is.Not.Null);
+            Assert.That(hud.GetComponent<RectTransform>().sizeDelta, Is.EqualTo(new Vector2(484,132)));
+            var ammo = Object.FindFirstObjectByType<CargoMissionOverlay>().GetComponentsInChildren<TMP_Text>().Single(t => t.name == "Ammo");
+            Assert.That(ammo.transform.IsChildOf(hud.transform), Is.True);
+            Assert.That(ammo.text, Is.EqualTo(player.GetComponent<PlayerWeapon>().HudText));
+            Assert.That(hud.Portrait.SourceHeadName, Is.EqualTo(index == 0 ? "HV4_J_HEAD" : "MR1_J_HEAD"));
+            Assert.That(hud.Portrait.Texture, Is.Not.Null);
+            Assert.That(hud.AbilityIcon.canvasRenderer, Is.Not.Null);
+            Assert.That(hud.AbilityIcon.Kind, Is.EqualTo((SurvivorKind)index));
+            Assert.That(hud.CooldownText.text, Is.EqualTo("READY"));
+            hp.ApplyDamage(hp.Maximum * .25f);
+            energy.Tick(true, 1f, 2f);
+            Assert.That(hud.HealthFraction, Is.EqualTo(hp.Current / hp.Maximum).Within(.001));
+            Assert.That(hud.StaminaFraction, Is.EqualTo(energy.Current / energy.Maximum).Within(.001));
+            yield return new WaitForSeconds(.3f);
+            Assert.That(hud.HealthFill.rectTransform.anchorMax.x, Is.EqualTo(.75f).Within(.01));
+            Assert.That(hud.StaminaFill.rectTransform.anchorMax.x, Is.EqualTo(energy.Current / energy.Maximum).Within(.05));
+            // Shorten only this test instance's cooldown to exercise the complete countdown.
+            var settings = new SerializedObject(power);
+            settings.FindProperty(index == 0 ? "chargeCooldown" : "medicCooldown").floatValue = .8f;
+            settings.ApplyModifiedPropertiesWithoutUndo();
+            Assert.That(power.TryActivate(), Is.True);
+            yield return null;
+            Assert.That(hud.AbilityIcon.RemainingFraction, Is.EqualTo(power.CooldownRemaining / power.CooldownDuration).Within(.05));
+            Assert.That(hud.CooldownText.text, Does.EndWith("s"));
+            Assert.That(hud.AbilityIcon.Ready, Is.False);
+            CaptureInterface(index == 0 ? "heavy-hud-1280.png" : "medic-hud-1280.png", 1280, 800);
+            CaptureInterface(index == 0 ? "heavy-hud-small.png" : "medic-hud-small.png", 800, 600);
+            yield return new WaitForSeconds(1f);
+            Assert.That(hud.CooldownText.text, Is.EqualTo("READY"));
+            Assert.That(hud.AbilityIcon.RemainingFraction, Is.Zero);
+            Assert.That(hud.AbilityIcon.Ready, Is.True);
+            CaptureInterface(index == 0 ? "heavy-hud-1080.png" : "medic-hud-1080.png", 1920, 1080);
+        }
+
         [UnityTest]
         public IEnumerator GameplayHudAndCooldownUseReadableSdfText()
         {
             yield return Start(0); OpenTestGround();
             Assert.That(player.GetComponent<CharacterAbility>().TryActivate(), Is.True);
             yield return new WaitForSeconds(.1f);
-            var cooldown = selection.transform.Find("DeploymentCanvas/AbilityStatus/AbilityText").GetComponent<TMP_Text>();
+            var cooldown = Object.FindFirstObjectByType<SurvivorHud>().CooldownText;
             Assert.That(cooldown.fontSize, Is.GreaterThanOrEqualTo(24));
-            Assert.That(cooldown.text, Does.Contain("Ready in")); Assert.That(cooldown.font, Is.Not.Null);
+            Assert.That(cooldown.text, Does.EndWith("s")); Assert.That(cooldown.font, Is.Not.Null);
             var mission = Object.FindFirstObjectByType<CargoMissionOverlay>();
             Assert.That(mission.GetComponentsInChildren<TMP_Text>().Count(t => t.gameObject.activeInHierarchy), Is.GreaterThanOrEqualTo(4));
             Assert.That(mission.GetComponentsInChildren<UnityEngine.UI.Text>(), Is.Empty);
@@ -301,15 +373,15 @@ namespace CargoSquad.Tests
         {
             yield return Start(1); OpenTestGround();
             var ability = player.GetComponent<CharacterAbility>();
-            var hud = selection.transform.Find("DeploymentCanvas/AbilityStatus");
+            var hud = Object.FindFirstObjectByType<SurvivorHud>().transform;
             Vector2 hudPosition = RectTransformUtility.WorldToScreenPoint(null, hud.position);
-            // The panel has a top-right pivot; choose a point inside it.
-            InputSystem.QueueStateEvent(mouse, new MouseState { position = hudPosition - new Vector2(100, 25) });
+            // Choose a point inside the bottom-left survivor panel.
+            InputSystem.QueueStateEvent(mouse, new MouseState { position = hudPosition + new Vector2(100, 25) });
             yield return null;
             Assert.That(ability.PointerOverUI(), Is.True); Assert.That(ability.TryActivate(), Is.False);
             InputSystem.QueueStateEvent(mouse, new MouseState { position = new Vector2(40, Screen.height - 60) });
             yield return null;
-            Assert.That(ability.PointerOverUI(), Is.True, "legacy stamina HUD blocks abilities");
+            Assert.That(ability.PointerOverUI(), Is.True, "mission panel blocks abilities");
             Assert.That(ability.TryActivate(), Is.False);
             InputSystem.QueueStateEvent(mouse, new MouseState { position = Vector2.zero }); yield return null;
             var canvas = new GameObject("BlockingTestUI", typeof(RectTransform), typeof(Canvas), typeof(GraphicRaycaster)); created.Add(canvas);
@@ -336,5 +408,19 @@ namespace CargoSquad.Tests
             Assert.That(ability.TryActivate(), Is.False); Assert.That(ability.CooldownRemaining, Is.Zero);
         }
     }
+    [DefaultExecutionOrder(10000)]
+    public sealed class SouthEdgeVisibilityProbe : MonoBehaviour
+    {
+        public CapsuleCollider Capsule;
+        public Camera View;
+        public float MinimumViewportY = 1f;
+        private void LateUpdate()
+        {
+            if (!Capsule || !View) return;
+            Vector3 feet = Capsule.transform.position; feet.y = Capsule.bounds.min.y;
+            MinimumViewportY = Mathf.Min(MinimumViewportY, View.WorldToViewportPoint(feet).y);
+        }
+    }
+
 }
 #endif

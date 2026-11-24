@@ -1,4 +1,10 @@
 {
     "name": "CargoSquad.Runtime",
-    "references": ["Unity.InputSystem", "Unity.ugui", "Unity.TextMeshPro"]
+    "references": [
+        "Unity.InputSystem",
+        "Unity.ugui",
+        "Unity.TextMeshPro",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ]
 }

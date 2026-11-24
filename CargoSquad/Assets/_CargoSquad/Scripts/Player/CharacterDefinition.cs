@@ -17,6 +17,10 @@ namespace CargoSquad.Player
         [SerializeField, Min(0)] private float stealthModifier = 1;
         [SerializeField, Min(0)] private float scavengingModifier = 1;
 
+        [SerializeField, Min(0f), Tooltip("Outgoing weapon and shoulder-bash damage multiplier. 1 = normal, 2 = double damage. Does not affect healing or stun duration.")]
+        private float damageStrength = 1f;
+        public float DamageStrength => Mathf.Max(0f, damageStrength);
+
         public string DisplayName => displayName;
         public float MaxHealth => Mathf.Max(1, maxHealth);
         public float WalkSpeed => Mathf.Max(0, walkSpeed);
