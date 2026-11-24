@@ -1,0 +1,12 @@
+Original Medic energy audio previews and synthesis code
+
+Created from scratch for Cargo Squad on 2026-11-24.
+No input recordings, samples, Call of Duty audio, or YouTube audio were used.
+The YouTube reference was consulted only for its metadata and the user's broad stylistic brief; it was not downloaded or extracted.
+
+These original procedural WAV files and synthesize.py are offered under CC0 1.0 Universal (public domain dedication), including modification and redistribution in public source repositories.
+CC0 terms: https://creativecommons.org/publicdomain/zero/1.0/
+
+The user approved the auditions and authorized their application to Medic. No exact match to the reference is claimed.
+
+Status: The user approved both previews and authorized application to Medic. The WAVs are now applied byte-for-byte, retaining existing clip GUIDs and weapon volume.

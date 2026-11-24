@@ -28,6 +28,7 @@ namespace CargoSquad.Player
             carrier = GetComponent<CargoInteractor>();
             ability = GetComponent<CharacterAbility>();
             health = GetComponent<Health>();
+            if (!GetComponent<PlayerAudio>()) gameObject.AddComponent<PlayerAudio>();
             if (!inputActions ||
                 inputActions.FindAction("Player/Move") is not InputAction moveAction ||
                 inputActions.FindAction("Player/Sprint") is not InputAction sprintAction)

@@ -28,6 +28,9 @@ namespace CargoSquad.Combat
         [Min(1)] public float sprintSpreadMultiplier = 1.2f;
         public Color effectColor = new Color(1, .75f, .35f);
         public AudioClip fireClip, emptyClip, reloadClip;
+        [Header("Shotgun shell reload only")]
+        [Min(.05f)] public float shellInsertInterval = .65f;
+        public AudioClip shellInsertClip, reloadFinishClip;
         [Range(0, 1)] public float volume = .5f;
 
         // Each pellet samples its own stratum; a single-shot weapon samples the central half.

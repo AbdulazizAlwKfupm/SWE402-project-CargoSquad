@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9ce425eba5d48018ec94b629ce275a, type: 3}
+  m_Name: CargoSquadPlayerAudio
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Player.PlayerAudioSettings
+  footsteps:
+  - {fileID: 8300000, guid: b90483b226c784d0f9ad405f136a549b, type: 3}
+  - {fileID: 8300000, guid: 7106dfd4c541249f1a10ea9f25062c64, type: 3}
+  - {fileID: 8300000, guid: f39f688b58a6a4c7289bf3766560050f, type: 3}
+  - {fileID: 8300000, guid: 31dfa7cd0fcb3452aa21ccb8e638eb74, type: 3}
+  pickup: {fileID: 8300000, guid: b799b1be47b174de09bee977fa5d4a9a, type: 3}
+  drop: {fileID: 8300000, guid: 590d6837327eb47f7bebe586364c9cc4, type: 3}
+  slip: {fileID: 8300000, guid: 61b634c0052364693a99ed9ffdd5052a, type: 3}
+  footstepVolume: 0.22
+  cargoVolume: 0.3
+  metresPerStep: 1.65
+  missionSuccess: {fileID: 8300000, guid: f347632d531641ee9d9ce4d093cc47ab, type: 3}
+  missionSuccessVolume: 0.25

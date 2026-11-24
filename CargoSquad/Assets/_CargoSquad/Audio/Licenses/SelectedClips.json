@@ -1,0 +1,221 @@
+[
+  {
+    "clip": "ShotgunFire",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/Isolated/20 Gauge/WAV/20 Gauge Single Isolated.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "491073bff2e8f28c6419094d72331efa610e3fd0ff896b3418122e375f296049",
+    "start_seconds": 0.0034,
+    "duration": 0.5144,
+    "gain_db": -8.32
+  },
+  {
+    "clip": "RifleFire",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/Isolated/.308 (7.62x51)/WAV/308 Single Isolated.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "69bfff345872a586a7551bc5edc9076658034d6322bfd1bd4219ebac61a323af",
+    "start_seconds": 0.0,
+    "duration": 0.6462,
+    "gain_db": -9.49
+  },
+  {
+    "clip": "PistolFire",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/Isolated/9mm/WAV/9mm Single Isolated.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "ac0e0ac774f0155d049e9bcdfc8b7aaffecda72c10d86bc6025212d32f169b47",
+    "start_seconds": 0.0,
+    "duration": 0.5473,
+    "gain_db": -9.57
+  },
+  {
+    "clip": "DryFire",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/& More/Pistol/WAV/9mm Pistol Dry Fire.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "2d15470a4535b072c8387552d57266ec3ddf8330e956d775a2be0cb5dc51bdf5",
+    "start_seconds": 0.0,
+    "duration": 0.1776,
+    "gain_db": -11.04
+  },
+  {
+    "clip": "PistolReload",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/& More/Pistol/WAV/9mm Pistol Reload 1.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "831f3b845f76848d41352bd1fffe3951f290dd53dbd13b407a01821340dddb7c",
+    "start_seconds": 0.0,
+    "duration": 0.3052,
+    "gain_db": 1.0
+  },
+  {
+    "clip": "RifleReload",
+    "archive_member": "Snake's SECOND Authentic Gun Sounds/& More/Mag Pack/WAV/AR PolyMag Pack.wav",
+    "archive": "Snake's SECOND Authentic Gun Sounds.zip",
+    "source_sha256": "6926c1ec30b6217f5172bbf908355468e4cd1cba04b2490a0e7990a5ded28880",
+    "start_seconds": 0.0,
+    "duration": 0.5156,
+    "gain_db": -7.69
+  },
+  {
+    "clip": "StunFire",
+    "origin": "Original procedural synthesis created for Cargo Squad; user-approved audition",
+    "approved_preview_filename": "FIRE_original_energy_discharge.wav",
+    "sha256": "f23087286b5aa79d8c1cf5646798a2f75ad0a17313eddd3143a5967943a4b850",
+    "license": "CC0-1.0",
+    "license_file": "MedicEnergy-CC0.txt",
+    "duration": 0.48,
+    "sample_rate": 48000,
+    "channels": 1,
+    "peak_dbfs": -9,
+    "processing": "Original procedural energy discharge; approved audition applied byte-for-byte. No input recordings or samples.",
+    "synthesis_source_sha256": "d0d77f8d6fb637bfdd08aa1b5846e108c1bb081dedc6411c9812f59cb8b84773"
+  },
+  {
+    "clip": "StunReload",
+    "origin": "Original procedural synthesis created for Cargo Squad; user-approved audition",
+    "approved_preview_filename": "RELOAD_original_electrical_charge_1p3s.wav",
+    "sha256": "105e3c9ca72be61be81b7dd33636cb2577e204700a6d7e42015d8c8aa483fe29",
+    "license": "CC0-1.0",
+    "license_file": "MedicEnergy-CC0.txt",
+    "duration": 1.3,
+    "sample_rate": 48000,
+    "channels": 1,
+    "peak_dbfs": -12,
+    "processing": "Original procedural electrical recharge with ready snap at 1.17s; approved audition applied byte-for-byte. Existing 1.3-second ammo timing unchanged.",
+    "synthesis_source_sha256": "d0d77f8d6fb637bfdd08aa1b5846e108c1bb081dedc6411c9812f59cb8b84773"
+  },
+  {
+    "clip": "CargoPickup",
+    "archive_member": "Audio/impactWood_light_003.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "cdfbe8af2fe7ff9ee28f337a0a989deee0f327620da456c8413644880e9d0004",
+    "start_seconds": 0.0,
+    "duration": 0.2627,
+    "gain_db": -19.94,
+    "pitch_rate": 1.0,
+    "peak_dbfs": -18,
+    "processing": "Mono 44.1kHz; trim at -60 dBFS with 3ms pre-roll and 40ms tail; 1ms/8ms edge fades; normalize after fades. Slip uses one slowed wooden impact, no layered/delayed hit."
+  },
+  {
+    "clip": "CargoDrop",
+    "archive_member": "Audio/impactWood_heavy_002.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "ce1e06f2a05f2634c645cb72f6a1623e64bc2d92be34917430a61031fb6597d4",
+    "start_seconds": 0.0,
+    "duration": 0.3101,
+    "gain_db": -16.04,
+    "pitch_rate": 1.0,
+    "peak_dbfs": -14,
+    "processing": "Mono 44.1kHz; trim at -60 dBFS with 3ms pre-roll and 40ms tail; 1ms/8ms edge fades; normalize after fades. Slip uses one slowed wooden impact, no layered/delayed hit."
+  },
+  {
+    "clip": "CargoSlip",
+    "archive_member": "Audio/impactWood_heavy_002.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "ce1e06f2a05f2634c645cb72f6a1623e64bc2d92be34917430a61031fb6597d4",
+    "start_seconds": 0.0,
+    "duration": 0.3782,
+    "gain_db": -13.04,
+    "pitch_rate": 0.82,
+    "peak_dbfs": -11,
+    "processing": "Mono 44.1kHz; trim at -60 dBFS with 3ms pre-roll and 40ms tail; 1ms/8ms edge fades; normalize after fades. Slip uses one slowed wooden impact, no layered/delayed hit."
+  },
+  {
+    "clip": "ConcreteStep0",
+    "archive_member": "Audio/footstep_concrete_000.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "d7267e183067757c92c169de2a379abea592cfca6b39bb2e8feea15221ad79fe",
+    "start_seconds": 0.0,
+    "duration": 0.103,
+    "gain_db": -6.27
+  },
+  {
+    "clip": "ConcreteStep1",
+    "archive_member": "Audio/footstep_concrete_001.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "507a75eb19b897087855a3be3cf11a12d7fa37d143ad535eeebe0b8031c7325d",
+    "start_seconds": 0.0,
+    "duration": 0.1047,
+    "gain_db": -4.92
+  },
+  {
+    "clip": "ConcreteStep2",
+    "archive_member": "Audio/footstep_concrete_002.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "b21fa546d74941196b25da8a20b7010abd8c05c4fcf93545d1f344e66a664e13",
+    "start_seconds": 0.0,
+    "duration": 0.1099,
+    "gain_db": -5.49
+  },
+  {
+    "clip": "ConcreteStep3",
+    "archive_member": "Audio/footstep_concrete_003.ogg",
+    "archive": "kenney_impact-sounds.zip",
+    "source_sha256": "8b513c2f0316324060b9174b8f28df6c2147418c506e6a53b77f18e149a5547b",
+    "start_seconds": 0.0,
+    "duration": 0.1076,
+    "gain_db": -5.42
+  },
+  {
+    "clip": "ShotgunShellInsert",
+    "archive": "shotgunsounds.zip",
+    "archive_member": "ShotgunSounds/Subsequent Shells.mp3",
+    "source_sha256": "47bae369718bfe74979dbc419ee11c561b53a66385c9b0281a0a3d588719ca1e",
+    "source_range_seconds": [
+      0.62,
+      1.36
+    ],
+    "tempo": 1.25,
+    "trimmed_leading_output_seconds": 0.03855,
+    "duration": 0.55859,
+    "peak_dbfs": -10,
+    "processing": "Mono PCM 44.1kHz, pitch-preserving tempo, trimmed pre-roll to 1ms, 1ms/10ms fades, peak level after fades."
+  },
+  {
+    "clip": "ShotgunRack",
+    "archive": "shotgunsounds.zip",
+    "archive_member": "ShotgunSounds/Rack.mp3",
+    "source_sha256": "c97f10056f123dce481e249457263329aa95237ecd7a77ee1fa96f8eaed0bf91",
+    "source_range_seconds": [
+      0.59,
+      1.128
+    ],
+    "tempo": 1.0,
+    "trimmed_leading_output_seconds": 0.01324,
+    "duration": 0.51989,
+    "peak_dbfs": -12,
+    "processing": "Mono PCM 44.1kHz, pitch-preserving tempo, trimmed pre-roll to 1ms, 1ms/10ms fades, peak level after fades."
+  },
+  {
+    "clip": "MissionSuccess",
+    "archive": "kenney_sci-fi-sounds.zip",
+    "archive_member": "Audio/forceField_002.ogg",
+    "source_sha256": "051b0eafc479695af4ca3607d41fd4be41bae7c21f4f9508d004722b09f1bd63",
+    "duration": 1.3,
+    "parts": [
+      {
+        "source_range_seconds": [
+          0,
+          0.45
+        ],
+        "pitch_rate": 1.0,
+        "output_start_seconds": 0.0
+      },
+      {
+        "source_range_seconds": [
+          0,
+          0.45
+        ],
+        "pitch_rate": 1.25,
+        "output_start_seconds": 0.4
+      },
+      {
+        "source_range_seconds": [
+          0,
+          0.72
+        ],
+        "pitch_rate": 1.5,
+        "output_start_seconds": 0.8
+      }
+    ],
+    "peak_dbfs": -12,
+    "processing": "Ascending three-note electronic completion cue derived from the licensed force-field timbre; pitched 1x/1.25x/1.5x, 20ms/80ms fades, mono PCM44.1kHz; listening approval pending."
+  }
+]

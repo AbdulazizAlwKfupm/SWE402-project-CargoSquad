@@ -31,7 +31,10 @@ MonoBehaviour:
   carryingSpreadMultiplier: 1.5
   sprintSpreadMultiplier: 1.2
   effectColor: {r: 1, g: 0.75, b: 0.35, a: 1}
-  fireClip: {fileID: 0}
-  emptyClip: {fileID: 0}
+  fireClip: {fileID: 8300000, guid: a74cbe022f5ca404dbb0c6c23978e768, type: 3}
+  emptyClip: {fileID: 8300000, guid: b4e6e76dfd1654be3b9f18f51fc6638f, type: 3}
   reloadClip: {fileID: 0}
-  volume: 0.5
+  volume: 0.28
+  shellInsertClip: {fileID: 8300000, guid: f9e54089b41b428b946765eacb3af8b8, type: 3}
+  reloadFinishClip: {fileID: 8300000, guid: 204bbc53f7a84958b285acb877f59947, type: 3}
+  shellInsertInterval: 0.65

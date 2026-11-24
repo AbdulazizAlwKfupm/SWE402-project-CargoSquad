@@ -1,0 +1,10 @@
+Shotgun Reload Sound effects — zer0_sol
+Original source and CC0 license declaration:
+https://opengameart.org/content/shotgun-reload-sound-effects
+Verified: 2026-11-24
+Original download: shotgunsounds.zip (archive SHA-256 recorded in SelectedClips.json)
+The ZIP includes six MP3s and no license/readme file. This is a source/permission record, not an archive-supplied license.
+The original upload explicitly lists CC0 and describes shells being loaded and the shotgun being operated. Attribution is optional. CC0 permits modification and redistribution, including the audio files in a public source repository.
+CC0 terms: https://creativecommons.org/publicdomain/zero/1.0/
+Selected original recordings: Subsequent Shells.mp3; Rack.mp3.
+Edits and individual source hashes are recorded in SelectedClips.json.

@@ -28,6 +28,8 @@ namespace CargoSquad.Combat
         private AimingConeIndicator cone;
         private WeaponFeedback feedback;
         private AudioSource audioSource;
+        private AudioSource shellReloadSource;
+        private bool finishingShellReload;
         private System.Random random;
         private float nextShot, reloadEnds, facingUntil, noticeUntil;
         private string notice;
@@ -54,6 +56,8 @@ namespace CargoSquad.Combat
         public string HudText => !Definition ? "" : $"{Definition.displayName}  {Magazine} / {Reserve}" +
             (Reloading ? "   RELOADING" : Time.time < noticeUntil ? "   " + notice : "");
         public event Action Changed;
+        // Audible reload cues only; never forwarded to AI GameplayNoise.
+        public event Action<AudioClip> ReloadCuePlayed;
 
         private void Awake()
         {
@@ -67,9 +71,13 @@ namespace CargoSquad.Combat
             feedback = obj.AddComponent<WeaponFeedback>(); feedback.Initialize(feedbackMaterial);
             audioSource = gameObject.AddComponent<AudioSource>(); audioSource.playOnAwake = false;
             audioSource.spatialBlend = 0;
+            shellReloadSource = gameObject.AddComponent<AudioSource>();
+            shellReloadSource.playOnAwake = false; shellReloadSource.spatialBlend = 0;
         }
+        private void OnEnable() { if (health) health.Died += CancelReload; }
         public void Equip(SurvivorKind kind, SurvivorVisual activeVisual)
         {
+            CancelReload();
             Definition = kind == SurvivorKind.Heavy ? heavyWeapon : medicWeapon; visual = activeVisual;
             Magazine = Definition ? Definition.magazineCapacity : 0; Reserve = Definition ? Definition.reserveAmmunition : 0;
             Reloading = false; nextShot = 0; facingUntil = 0; noticeUntil = 0;
@@ -93,17 +101,19 @@ namespace CargoSquad.Combat
             if (waitForRelease && Time.frameCount > equipFrame + 1 && (mouse == null || !mouse.leftButton.isPressed)) waitForRelease = false;
             if (!CanUse)
             {
-                CancelAim(true); Reloading = false; return;
-            }
-            if (Reloading && Time.time >= reloadEnds)
-            {
-                int amount = Mathf.Min(Definition.magazineCapacity - Magazine, Reserve);
-                Magazine += amount; Reserve -= amount; Reloading = false; Changed?.Invoke();
+                CancelAim(true); CancelReload(); return;
             }
             bool overUI = ability.PointerOverUI();
             bool validAim = mouse != null && AimAtScreen(mouse.position.ReadValue());
+            if (Reloading && Definition.type == WeaponType.Shotgun && Magazine > 0 && !overUI && validAim &&
+                !waitForRelease && mouse.leftButton.wasPressedThisFrame) CancelReload();
+            if (Reloading && Time.time >= reloadEnds) AdvanceReload();
             if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame) TryReload();
-            if (overUI || !validAim || Reloading) { CancelAim(true); return; }
+            if (overUI || !validAim || Reloading)
+            {
+                bool shellReload = Reloading && Definition.type == WeaponType.Shotgun;
+                CancelAim(!shellReload || overUI || !validAim); return;
+            }
             if (mouse.leftButton.wasPressedThisFrame && !waitForRelease) aimArmed = true;
             // Only a gesture that began in the world may fire. Cancelled/UI-held gestures stay cancelled.
             if (aimArmed && mouse.leftButton.wasReleasedThisFrame)
@@ -129,19 +139,83 @@ namespace CargoSquad.Combat
         private void OnApplicationFocus(bool focused)
         {
             hasFocus = focused;
-            if (!focused) CancelAim(true);
+            if (!focused) { CancelAim(true); if (Definition && Definition.type == WeaponType.Shotgun) CancelReload(); }
         }
-        private void OnApplicationPause(bool paused) { if (paused) CancelAim(true); }
+        private void OnApplicationPause(bool paused)
+        {
+            if (!paused) return;
+            CancelAim(true); if (Definition && Definition.type == WeaponType.Shotgun) CancelReload();
+        }
         public bool TryReload()
         {
             if (!CanUse || Reloading || Magazine >= Definition.magazineCapacity || Reserve <= 0) return false;
             CancelAim(true);
-            Reloading = true; reloadEnds = Time.time + Definition.reloadDuration;
-            Play(Definition.reloadClip); Changed?.Invoke(); return true;
+            Reloading = true; finishingShellReload = false;
+            if (Definition.type == WeaponType.Shotgun)
+                reloadEnds = Time.time + ShellInterval;
+            else
+            {
+                reloadEnds = Time.time + Definition.reloadDuration;
+                Play(Definition.reloadClip);
+                if (Definition.reloadClip) ReloadCuePlayed?.Invoke(Definition.reloadClip);
+            }
+            Changed?.Invoke(); return true;
+        }
+        private float ShellInterval => Mathf.Max(.05f, Definition.shellInsertInterval,
+            Definition.shellInsertClip ? Definition.shellInsertClip.length : 0f);
+
+        private void AdvanceReload()
+        {
+            if (Definition.type != WeaponType.Shotgun)
+            {
+                int amount = Mathf.Min(Definition.magazineCapacity - Magazine, Reserve);
+                Magazine += amount; Reserve -= amount; Reloading = false; Changed?.Invoke();
+                return;
+            }
+            if (finishingShellReload)
+            {
+                Reloading = false; finishingShellReload = false; Changed?.Invoke();
+                return;
+            }
+            if (Magazine >= Definition.magazineCapacity || Reserve <= 0)
+            {
+                // Waited for the final insertion cue to finish before playing the rack once.
+                finishingShellReload = true;
+                reloadEnds = Time.time + (Definition.reloadFinishClip ? Definition.reloadFinishClip.length : .05f);
+                PlayShellReload(Definition.reloadFinishClip);
+                return;
+            }
+            // One committed shell and one insertion cue, in the same frame. Never catch up
+            // multiple shells in a stalled frame, which would stack sounds and grant extra ammo.
+            Magazine++; Reserve--;
+            reloadEnds = Time.time + ShellInterval;
+            PlayShellReload(Definition.shellInsertClip);
+            Changed?.Invoke();
+        }
+
+        private void PlayShellReload(AudioClip clip)
+        {
+            if (!clip) return;
+            shellReloadSource.clip = clip; shellReloadSource.volume = Definition.volume;
+            shellReloadSource.Play();
+            ReloadCuePlayed?.Invoke(clip);
+        }
+
+        public void CancelReload()
+        {
+            bool wasReloading = Reloading;
+            Reloading = false; finishingShellReload = false;
+            if (shellReloadSource) shellReloadSource.Stop();
+            if (wasReloading) Changed?.Invoke();
         }
         public bool TryFire()
         {
-            if (!CanUse || Reloading || waitForRelease || ability.PointerOverUI() || Time.time < nextShot) return false;
+            if (!CanUse || waitForRelease || ability.PointerOverUI() || Time.time < nextShot) return false;
+            if (Reloading)
+            {
+                if (Definition.type != WeaponType.Shotgun || Magazine <= 0) return false;
+                CancelReload();
+            }
             if (Magazine <= 0)
             {
                 nextShot = Time.time + .2f; notice = "EMPTY / R TO RELOAD"; noticeUntil = Time.time + 1;
@@ -183,7 +257,11 @@ namespace CargoSquad.Combat
             return true;
         }
         private void Play(AudioClip clip) { if (clip) audioSource.PlayOneShot(clip, Definition.volume); }
-        private void OnDisable() { CancelAim(true); Reloading = false; if (feedback) feedback.Clear(); }
+        private void OnDisable()
+        {
+            if (health) health.Died -= CancelReload;
+            CancelAim(true); CancelReload(); if (feedback) feedback.Clear();
+        }
         private void OnDestroy() { if (cone) Destroy(cone.gameObject); }
     }
 }
