@@ -42,7 +42,7 @@ namespace CargoSquad.Tests
             Assert.That(weapon, Is.Not.Null);
             body = weapon.GetComponent<Rigidbody>(); carrier = weapon.GetComponent<CargoInteractor>();
             wolf = Object.FindFirstObjectByType<MutatedWolfAI>();
-            Assert.That(wolf, Is.Not.Null, "Install the approved Wolf V2 locally.");
+            Assert.That(wolf, Is.Not.Null, "The mission spawner must create its configured wolf.");
             mouse = InputSystem.AddDevice<Mouse>(); keyboard = InputSystem.AddDevice<Keyboard>();
             InputSystem.QueueStateEvent(mouse, new MouseState { position = new Vector2(Screen.width * .5f, Screen.height * .4f) });
         }
@@ -359,7 +359,17 @@ namespace CargoSquad.Tests
             for (int step = 0; step < 25; step++) yield return new WaitForFixedUpdate();
             Assert.That(health.Current, Is.EqualTo(Mathf.Max(0, before - weapon.GetComponent<CharacterAbility>().ChargeDamage)).Within(.001f));
             Assert.That(bar.TargetFraction, Is.EqualTo(health.Current / health.Maximum).Within(.001f));
-            health.ApplyDamage(999); Assert.That(health.Current, Is.Zero); Assert.That(bar.Visible, Is.False);
+            body.position = wolf.transform.position + new Vector3(0, 1, -1.6f);
+            body.linearVelocity = Vector3.zero;
+            Physics.SyncTransforms();
+            for (int shot = 0; shot < 4 && !health.IsDead; shot++)
+            {
+                yield return new WaitForSeconds(1f);
+                yield return MouseButton(Vector3.forward, 1);
+                yield return MouseButton(Vector3.forward, 0);
+            }
+            Assert.That(health.Current, Is.Zero, "Heavy must be able to finish the wolf with the shotgun.");
+            Assert.That(bar.Visible, Is.False);
             Capture("wolf-dead-health-hidden");
         }
         [UnityTest]

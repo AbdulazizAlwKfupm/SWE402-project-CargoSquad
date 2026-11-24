@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3807051120492676557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739460058017189698}
+  - component: {fileID: 912618613177268455}
+  m_Layer: 0
+  m_Name: AcidGlob
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739460058017189698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807051120492676557}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.21, y: 0.21, z: 0.38}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8658094987995644706}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912618613177268455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807051120492676557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da42f0584c886f46ae4323f44dbd490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.AcidGlob
+  radius: 0.1
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  impactSplash: {fileID: 6903454064384410896, guid: dc9f7b71482beb84686ef15db0957a47, type: 3}
+--- !u!1001 &8334813725142698339
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1739460058017189698}
+    m_Modifications:
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544841127719091272, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+      propertyPath: m_Name
+      value: AcidProjectileVisual
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+--- !u!4 &8658094987995644706 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 832197710197836353, guid: a6a37dc3aa69baa4eb3385c3a1a2fb4a, type: 3}
+  m_PrefabInstance: {fileID: 8334813725142698339}
+  m_PrefabAsset: {fileID: 0}

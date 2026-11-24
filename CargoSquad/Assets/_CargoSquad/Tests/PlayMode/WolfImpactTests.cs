@@ -38,8 +38,6 @@ namespace CargoSquad.Tests
         [UnitySetUp]
         public IEnumerator Load()
         {
-            if (!System.IO.File.Exists("Assets/_CargoSquad/Art/LocalMutatedWolfV2/Resources/MutatedWolfV2.prefab"))
-                Assert.Ignore("Install the licensed approved Wolf V2 locally to test bites.");
             EditorSceneManager.LoadSceneInPlayMode("Assets/_CargoSquad/Scenes/IndustrialDistrict.unity",
                 new LoadSceneParameters(LoadSceneMode.Single));
             yield return null; MissionResultTestSupport.KeepSimulationRunning();

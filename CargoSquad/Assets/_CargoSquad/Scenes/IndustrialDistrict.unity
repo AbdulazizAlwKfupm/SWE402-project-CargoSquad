@@ -3460,6 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4fd8eb32c2478aa99328adb338ecf3, type: 3}
   m_Name:
   m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.LocalWolfSpawn
+  wolfPrefab: {fileID: 4360187757034150625, guid: 190a3bd69a43e3c4c8f4c4b88c43f8aa, type: 3}
   patrolPoints:
   - {fileID: 260900322}
   - {fileID: 1735444883}

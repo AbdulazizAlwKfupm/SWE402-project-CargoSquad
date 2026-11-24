@@ -40,8 +40,6 @@ namespace CargoSquad.Tests
             mission = Object.FindFirstObjectByType<CargoExtraction>();
             body = carrier.GetComponent<Rigidbody>();
             keyboard = InputSystem.AddDevice<Keyboard>();
-            // Carrying-route checks isolate geometry from optional, locally installed enemy attacks.
-            foreach (var wolf in Object.FindObjectsByType<MutatedWolfAI>(FindObjectsSortMode.None)) wolf.enabled = false;
         }
 
         [UnityTearDown]
@@ -112,12 +110,12 @@ namespace CargoSquad.Tests
             InputSystem.QueueStateEvent(keyboard, new KeyboardState());
             yield return null;
             Assert.That(carrier.CarriedCargo, Is.SameAs(cargo));
-            yield return new WaitForSeconds(.35f);
+            yield return new WaitForSecondsRealtime(.35f);
             yield return IndustrialExpansionScreenshots.Capture(role + "-warehouse-carry");
             yield return WalkTo(new Vector2(0, -3));
             Assert.That(carrier.CarriedCargo, Is.SameAs(cargo), "Cargo must clear the warehouse entrance while carried.");
             yield return WalkTo(new Vector2(7, -3));
-            yield return new WaitForSeconds(.35f);
+            yield return new WaitForSecondsRealtime(.35f);
             yield return IndustrialExpansionScreenshots.Capture(role + "-extraction-approach");
             yield return WalkTo(new Vector2(11, -3));
             for (int i = 0; i < 5; i++) yield return null;

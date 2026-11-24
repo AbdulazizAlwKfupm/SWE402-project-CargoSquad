@@ -200,3 +200,42 @@ No existing script, prefab, ScriptableObject or the `IndustrialDistrict` scene w
 ## Next executable task
 
 Give the crate a readable material, then decide whether carried cargo should collide with walls and whether cargo dimensions should be driven by `CargoDefinition.Size`.
+
+## Heavy redesign (look-development track)
+
+- **Approved 2026-11-15:** Heavy V4 appearance (`ArtSource/Characters/Survivors/Heavy_v4.blend`, renders in
+  `ArtSource/Characters/Reviews/Heavy/V4/`). V2 and V3 are kept as earlier iterations.
+- V4 is a look-development model (about 220k triangles, procedural Cycles materials plus Poly Haven CC0 maps and props;
+  see `Reviews/Heavy/V4/ASSET_SOURCES.md`). It is **not** in Unity: the game still uses the original Heavy prefab.
+- Still to do before it can replace the in-game Heavy: game-resolution mesh, UVs and baked textures, binding to the shared
+  humanoid rig, FBX export, Unity import and prefab update.
+- Known visual limits accepted at approval: simplified hands and grip, noise-based cloth folds, stylised face.
+
+## Medic redesign (look-development track)
+
+- **Approved 2026-11-15:** Medic redesign v1 appearance (`ArtSource/Characters/Survivors/Medic_Redesign_v1.blend`, renders in
+  `ArtSource/Characters/Reviews/Medic/RedesignV1/`). Built new from `ArtSource/References/Medic_Approved_Concept.png`; the old
+  `Medic.blend` was not used and is unchanged.
+- Look-development model (about 183k triangles, procedural Cycles materials plus Poly Haven CC0 texture maps). It is **not** in
+  Unity: the game still uses the original Medic prefab.
+- Marking is an original teal square with a white diamond plus "MED", not a protected emblem.
+- Known visual limits accepted at approval: clean flat off-white panels, small smooth helmet, sparse vest front, simplified
+  hands and face, noise-based cloth folds. Mesh QA was not run.
+- Still to do before it can replace the in-game Medic: game-resolution mesh, UVs and baked textures, binding to the shared
+  humanoid rig, FBX export, Unity import and prefab update.
+
+## Mutated Wolf redesign (look-development track)
+
+- **Approved 2026-11-16:** Mutated Wolf V2 appearance (`ArtSource/Characters/Creatures/MutatedWolf_Redesign_v2.blend`, renders in
+  `ArtSource/Characters/Reviews/MutatedWolf/RedesignV2/`). V1 is kept as the earlier iteration; the old `MutatedWolf.blend`
+  was not used and is unchanged.
+- Base: Dire Wolf Lite by Literock Studios (free licence, modification allowed). Its 35-bone rig, skin weights and four
+  animations (idle, walk, run, bite) are unchanged; all added parts are skinned to it. About 36,500 triangles.
+- **Licence constraint:** the raw asset and the modified .blend must not be published on their own (for example in a public
+  repository); shipping inside a built game is allowed. Details in `Reviews/MutatedWolf/RedesignV1/ASSET_SOURCES.md`.
+- The creator discloses that the base mesh and textures were generated with an AI tool (Meshy).
+- It is **not** in Unity: the game still uses the original wolf prefab.
+- Known visual limits accepted at approval: fur locks look like flat blades close up, calm base face without a wrinkled snarl,
+  small tidy leg wounds, shallow crouch. Mesh QA was not run on V2.
+- Still to do: bake the Cycles-only hide and growth materials to textures, FBX export with the existing rig and clips,
+  Unity import as a Generic rig, prefab update.

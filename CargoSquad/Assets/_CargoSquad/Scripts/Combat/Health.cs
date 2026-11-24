@@ -15,6 +15,8 @@ namespace CargoSquad.Combat
         public bool IsDead => Current <= 0f;
         public event Action<float, float> Changed;
         public event Action Died;
+        public event Action<Vector3?, Vector3> Damaged;
+        public bool HasDamageFeedback => Damaged != null;
         private void Awake() => Current = maximum;
         public void ResetMaximum(float value)
         {
@@ -23,11 +25,15 @@ namespace CargoSquad.Combat
             Current = maximum;
             Changed?.Invoke(Current, Maximum);
         }
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(float damage) => ApplyDamage(damage, null, Vector3.zero);
+
+        public void ApplyDamage(float damage, Vector3? point, Vector3 normal)
         {
             if (IsDead || !float.IsFinite(damage) || damage <= 0f) return;
+            float previous = Current;
             Current = Mathf.Max(0f, Current - damage);
             Changed?.Invoke(Current, Maximum);
+            if (Current < previous) Damaged?.Invoke(point, normal);
             if (IsDead) Died?.Invoke();
         }
     }

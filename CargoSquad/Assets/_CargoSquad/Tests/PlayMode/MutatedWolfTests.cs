@@ -23,12 +23,33 @@ namespace CargoSquad.Tests
         private MutatedWolfAI wolf;
         private PlayerController player;
         private CharacterSelection selection;
+        private static readonly string[] Missions = { "IndustrialDistrict", "IndustrialExpansion" };
+
+        [UnityTest]
+        public IEnumerator MissionSpawnsConfiguredCC0Wolf([ValueSource(nameof(Missions))] string mission)
+        {
+            EditorSceneManager.LoadSceneInPlayMode($"Assets/_CargoSquad/Scenes/{mission}.unity",
+                new LoadSceneParameters(LoadSceneMode.Single));
+            yield return null;
+            yield return null;
+            var wolves = Object.FindObjectsByType<MutatedWolfAI>(FindObjectsSortMode.None);
+            Assert.That(wolves, Has.Length.EqualTo(1));
+            var activeWolf = wolves[0];
+            var spawn = Object.FindFirstObjectByType<LocalWolfSpawn>();
+            var expected = AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/_CargoSquad/Art/PixelMutatedWolf_CC0_v2/PixelMutatedWolf_CC0_v2.prefab");
+            Assert.That(activeWolf.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh,
+                Is.EqualTo(expected.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh));
+            Assert.That(activeWolf.GetComponentInChildren<Animator>().runtimeAnimatorController,
+                Is.EqualTo(expected.GetComponentInChildren<Animator>().runtimeAnimatorController));
+            Assert.That(Vector3.Distance(activeWolf.transform.position, spawn.transform.position), Is.LessThan(.2f));
+            Assert.That(activeWolf.GetComponent<NavMeshAgent>().isOnNavMesh);
+            Assert.That(activeWolf.GetComponent<WolfHealthIndicator>().Visible);
+        }
 
         [UnitySetUp]
         public IEnumerator Load()
         {
-            if (!System.IO.File.Exists("Assets/_CargoSquad/Art/LocalMutatedWolfV2/Resources/MutatedWolfV2.prefab"))
-                Assert.Ignore("Install the approved licensed Wolf V2 locally before running integration tests.");
             EditorSceneManager.LoadSceneInPlayMode("Assets/_CargoSquad/Scenes/IndustrialDistrict.unity",
                 new LoadSceneParameters(LoadSceneMode.Single));
             yield return null; MissionResultTestSupport.KeepSimulationRunning();
@@ -101,10 +122,24 @@ namespace CargoSquad.Tests
             enemyHealth.ApplyDamage(1000);
             Assert.That(wolf.State, Is.EqualTo(WolfState.Death));
             Vector3 dead = wolf.transform.position;
-            yield return new WaitForSeconds(1.6f);
+            yield return new WaitForSeconds(1.95f);
             Assert.That(health.Current, Is.EqualTo(afterBite));
             Assert.That(Vector3.Distance(wolf.transform.position, dead), Is.LessThan(0.02f));
             Assert.That(wolf.GetComponent<Collider>().enabled, Is.False);
+            var deathPose = wolf.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0);
+            Assert.That(deathPose.IsName("Death") && deathPose.normalizedTime >= 1f);
+            var skin = wolf.GetComponentInChildren<SkinnedMeshRenderer>();
+            var baked = new Mesh();
+            try
+            {
+                skin.BakeMesh(baked);
+                // BakeMesh already includes the import scale. Rotate its vertices into world axes.
+                var pose = Matrix4x4.TRS(skin.transform.position, skin.transform.rotation, Vector3.one);
+                var heights = baked.vertices.Select(v => pose.MultiplyPoint3x4(v).y - dead.y).ToArray();
+                Assert.That(heights.Min(), Is.InRange(-.025f, .04f), "The final pose must contact the floor.");
+                Assert.That(heights.Max(), Is.LessThan(1f), "The corpse must collapse.");
+            }
+            finally { Object.Destroy(baked); }
         }
 
         [UnityTest]
@@ -263,12 +298,17 @@ namespace CargoSquad.Tests
             wolf.enabled = false;
             var animator = wolf.GetComponentInChildren<Animator>();
             Assert.That(animator.avatar && animator.avatar.isValid, Is.True);
-            Assert.That(animator.runtimeAnimatorController.animationClips.Select(clip => clip.name),
-                Is.EquivalentTo(new[] { "idle_loop", "walk_loop", "run_loop", "bite" }));
+            var clips = animator.runtimeAnimatorController.animationClips;
+            var states = new[] { "Idle", "Walk", "Run", "Bite", "Hurt", "Stunned", "Death" };
+            Assert.That(clips.Select(clip => clip.name), Is.EquivalentTo(states));
+            var bite = clips.Single(clip => clip.name == "Bite");
+            Assert.That(bite.length, Is.EqualTo(1f).Within(.001f));
+            Assert.That(bite.events, Is.Empty, "Only the AI should apply bite damage.");
             var bones = wolf.GetComponentsInChildren<SkinnedMeshRenderer>()
                 .SelectMany(renderer => renderer.bones).Distinct().ToArray();
-            Assert.That(bones.Length, Is.EqualTo(35));
-            foreach (string state in new[] { "Idle", "Walk", "Run", "Bite" })
+            Assert.That(bones, Is.Not.Empty);
+            Assert.That(bones.All(bone => bone), Is.True);
+            foreach (string state in states)
             {
                 animator.Play(state, 0, 0f);
                 animator.Update(0f);
@@ -288,7 +328,7 @@ namespace CargoSquad.Tests
                 bounds.Encapsulate(renderer.bounds);
             }
             Assert.That(bounds.size.y, Is.InRange(1f, 2f));
-            Assert.That(bounds.size.z, Is.InRange(1.7f, 3.2f));
+            Assert.That(bounds.size.z, Is.InRange(1.7f, 3.6f));
             var cameraObject = new GameObject("Wolf validation camera");
             var camera = cameraObject.AddComponent<Camera>();
             camera.transform.position = bounds.center + new Vector3(3.2f, 1.5f, 3.5f);
@@ -307,8 +347,8 @@ namespace CargoSquad.Tests
             var image = new Texture2D(960, 600, TextureFormat.RGB24, false);
             image.ReadPixels(new Rect(0, 0, 960, 600), 0, 0);
             image.Apply();
-            System.IO.Directory.CreateDirectory("ValidationResults/WolfV2");
-            System.IO.File.WriteAllBytes("ValidationResults/WolfV2/wolf-idle.png", image.EncodeToPNG());
+            System.IO.Directory.CreateDirectory("ValidationResults/IntegratedWolf");
+            System.IO.File.WriteAllBytes("ValidationResults/IntegratedWolf/wolf-idle.png", image.EncodeToPNG());
             RenderTexture.active = previous;
             camera.targetTexture = null;
             Object.Destroy(image);

@@ -129,7 +129,12 @@ namespace CargoSquad.Player
             if (nearest.HasValue)
             {
                 step = Mathf.Clamp(nearest.Value.distance - skin, 0f, step);
-                nearest.Value.collider.GetComponentInParent<IDamageable>()?.ApplyDamage(chargeDamage);
+                var hit = nearest.Value;
+                var target = hit.collider.GetComponentInParent<IDamageable>();
+                if (target is Health healthTarget)
+                    healthTarget.ApplyDamage(chargeDamage, hit.distance > 0f ? hit.point : null,
+                        hit.distance > 0f ? hit.normal : -direction);
+                else target?.ApplyDamage(chargeDamage);
                 remaining = 0f;
             }
             else remaining = Mathf.Max(0f, remaining - step);

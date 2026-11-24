@@ -9,7 +9,7 @@ namespace CargoSquad.AI
     public enum WolfState { Idle, Patrol, Investigate, Chase, Attack, Search, Return, Death, Stunned }
 
     [DisallowMultipleComponent, RequireComponent(typeof(NavMeshAgent), typeof(Health))]
-    public sealed class MutatedWolfAI : MonoBehaviour
+    public sealed class MutatedWolfAI : MonoBehaviour, IStunnable
     {
         [SerializeField] private Transform[] patrolPoints;
         [SerializeField] private Animator animator;

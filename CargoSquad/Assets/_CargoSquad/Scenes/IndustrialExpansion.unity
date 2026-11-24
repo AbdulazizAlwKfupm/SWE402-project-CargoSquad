@@ -3665,6 +3665,86 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87209344}
   m_Mesh: {fileID: 4300000, guid: e4e9023aa04c449939f47aae32fb1249, type: 2}
+--- !u!1001 &87327461
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721031946199352388, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422516558028691134, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      propertyPath: m_Name
+      value: PixelAcidSpitter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5422516558028691134, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87327463}
+  m_SourcePrefab: {fileID: 100100000, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+--- !u!1 &87327462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5422516558028691134, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+  m_PrefabInstance: {fileID: 87327461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &87327463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87327462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499360ae4551b324d9e82e2f73e8c6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.EnemyDamageFeedback
+  effectPrefab: {fileID: 0}
+  fallbackHeight: 1
+  minimumBurstInterval: 0.08
 --- !u!1 &88870756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3911,7 +3991,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4280719070
   m_fontColor: {r: 0.87, g: 0.59, b: 0.14999998, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3924,7 +4004,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -6916,7 +6996,7 @@ Transform:
   m_GameObject: {fileID: 144796448}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 9}
+  m_LocalPosition: {x: 1.8, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13318,7 +13398,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4280719070
   m_fontColor: {r: 0.87, g: 0.59, b: 0.14999998, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -13331,7 +13411,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -28119,6 +28199,126 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522746667}
   m_Mesh: {fileID: 4300000, guid: e4e9023aa04c449939f47aae32fb1249, type: 2}
+--- !u!1001 &523484554
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786686670087804743, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331280859737026502, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: guardSpeed
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331280859737026502, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: smashDamage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331280859737026502, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: swipeDamage
+      value: 27.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331280859737026502, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: pursuitSpeed
+      value: 2.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331280859737026502, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: detectionRange
+      value: 6.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      propertyPath: m_Name
+      value: PixelArmoredCreature
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 523484556}
+    - targetCorrespondingSourceObject: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 523484557}
+  m_SourcePrefab: {fileID: 100100000, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+--- !u!1 &523484555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+  m_PrefabInstance: {fileID: 523484554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &523484556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523484555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb33811fcbb6b2e4e86a990a6c993852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.GroundSmashFeedback
+  warningPrefab: {fileID: 76534214466255070, guid: 9831e63e287c9a64f848f97b1482f0cc, type: 3}
+  impactPrefab: {fileID: 2057808402399083846, guid: eae8a85e0b48f1f4a85194406705cf34, type: 3}
+  warningColor: {r: 1, g: 0.48, b: 0.13, a: 1}
+  warningOpacity: 0.34
+  impactForwardOffset: 0.95
+--- !u!114 &523484557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523484555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499360ae4551b324d9e82e2f73e8c6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.EnemyDamageFeedback
+  effectPrefab: {fileID: 0}
+  fallbackHeight: 1.18
+  minimumBurstInterval: 0.08
 --- !u!1 &523781957
 GameObject:
   m_ObjectHideFlags: 0
@@ -31728,7 +31928,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4286230722
   m_fontColor: {r: 0.76, g: 0.69, b: 0.47999996, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -31741,7 +31941,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -45371,10 +45571,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4fd8eb32c2478aa99328adb338ecf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.LocalWolfSpawn
+  wolfPrefab: {fileID: 4360187757034150625, guid: 190a3bd69a43e3c4c8f4c4b88c43f8aa, type: 3}
   patrolPoints:
   - {fileID: 260900322}
   - {fileID: 1735444883}
   - {fileID: 144796449}
+  damageEffect: {fileID: 0}
 --- !u!4 &845296896
 Transform:
   m_ObjectHideFlags: 0
@@ -62581,6 +62783,7 @@ GameObject:
   - component: {fileID: 1171018300}
   - component: {fileID: 1171018299}
   - component: {fileID: 1171018301}
+  - component: {fileID: 1171018302}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Untagged
@@ -62684,6 +62887,7 @@ Transform:
   - {fileID: 342196427}
   - {fileID: 418118864}
   - {fileID: 1453597208}
+  - {fileID: 1209038802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1171018294
@@ -62830,6 +63034,20 @@ MonoBehaviour:
   groundHeight: 0
   groundOffset: 0.035
   spreadSeed: 402
+--- !u!114 &1171018302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171018289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681048107762c5940ba97205b9f13ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.ShotgunMuzzleFeedback
+  effectPrefab: {fileID: 6358212976981708394, guid: 2413f049afe20714084ea694d934490a, type: 3}
+  muzzleLocalPosition: {x: 0, y: -0.0076, z: 0.00086}
 --- !u!1 &1172131210
 GameObject:
   m_ObjectHideFlags: 0
@@ -63380,6 +63598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1177926245}
   - component: {fileID: 1177926246}
+  - component: {fileID: 1177926247}
   m_Layer: 0
   m_Name: Extraction Cyan Spill
   m_TagString: Untagged
@@ -63467,6 +63686,35 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1177926247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177926244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &1179486980
 GameObject:
   m_ObjectHideFlags: 0
@@ -64425,6 +64673,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205656853}
   m_Mesh: {fileID: 4300000, guid: e4e9023aa04c449939f47aae32fb1249, type: 2}
+--- !u!1001 &1209038801
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1171018293}
+    m_Modifications:
+    - target: {fileID: 2127894532420008564, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_Name
+      value: MedicElectricVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+--- !u!4 &1209038802 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2239806678841233879, guid: 69b00cdb90546494d88acfc223b6d11c, type: 3}
+  m_PrefabInstance: {fileID: 1209038801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1211149430
 GameObject:
   m_ObjectHideFlags: 0
@@ -69118,7 +69428,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4286230722
   m_fontColor: {r: 0.76, g: 0.69, b: 0.47999996, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -69131,7 +69441,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -86126,7 +86436,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4286230722
   m_fontColor: {r: 0.76, g: 0.69, b: 0.47999996, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -86139,7 +86449,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -90433,7 +90743,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4280719070
   m_fontColor: {r: 0.87, g: 0.59, b: 0.14999998, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -90446,7 +90756,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -92193,7 +92503,7 @@ Transform:
   m_GameObject: {fileID: 1735444882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92625,7 +92935,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4286230722
   m_fontColor: {r: 0.76, g: 0.69, b: 0.47999996, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -92638,7 +92948,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -94641,6 +94951,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3342771519400506823, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6481316034658461660, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
       propertyPath: m_Name
       value: ExtractionMarker
@@ -94660,6 +94974,14 @@ PrefabInstance:
     - target: {fileID: 7226806880647622467, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
       propertyPath: footprintAspect.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999056572183540160, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4293984089
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999056572183540160, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -103773,7 +104095,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4286230722
   m_fontColor: {r: 0.76, g: 0.69, b: 0.47999996, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -103786,7 +104108,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -112997,3 +113319,5 @@ SceneRoots:
   - {fileID: 1779492352}
   - {fileID: 824286128}
   - {fileID: 297877789}
+  - {fileID: 523484554}
+  - {fileID: 87327461}

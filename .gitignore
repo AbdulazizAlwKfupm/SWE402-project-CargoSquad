@@ -53,7 +53,18 @@ Thumbs.db
 /ArtSource/Characters/Creatures/MutatedWolf_Redesign_v2.*
 # Store any extracted meshes, textures, or later exports from Dire Wolf Lite here.
 /ArtSource/Private/DireWolfLite/
+# Local licensed Unity integration, including baked textures, controller and prefab.
+/CargoSquad/Assets/_CargoSquad/Art/LocalMutatedWolfV2/
+/CargoSquad/Assets/_CargoSquad/Art/LocalMutatedWolfV2.meta
+# This local backup archive contains the restricted wolf download and derivatives.
+/ArtSource.zip
+/CargoSquad/ValidationResults/WolfV2/
 
 *.blend[0-9]*
 __pycache__/
 *.py[cod]
+
+# Local combat validation captures and reports.
+/CargoSquad/ValidationResults/Weapons/
+
+/CargoSquad/ValidationResults/Extraction/

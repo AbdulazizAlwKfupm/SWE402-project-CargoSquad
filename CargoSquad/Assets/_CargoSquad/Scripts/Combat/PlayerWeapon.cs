@@ -1,5 +1,4 @@
 using System;
-using CargoSquad.AI;
 using CargoSquad.Cargo;
 using CargoSquad.Player;
 using CargoSquad.Visuals;
@@ -43,6 +42,7 @@ namespace CargoSquad.Combat
         public bool Reloading { get; private set; }
         public Vector3 AimDirection { get; private set; } = Vector3.forward;
         public bool IsAiming { get; private set; }
+        public Transform ActiveWeaponVisual => visual ? visual.Weapon : null;
         public bool ControlsFacing => CanUse && (IsAiming || Time.time < facingUntil);
         public bool ConeVisible => cone && cone.Visible;
         public bool CanUse => isActiveAndEnabled && Definition && visual && visual.gameObject.activeInHierarchy &&
@@ -56,6 +56,8 @@ namespace CargoSquad.Combat
         public string HudText => !Definition ? "" : $"{Definition.displayName}  {Magazine} / {Reserve}" +
             (Reloading ? "   RELOADING" : Time.time < noticeUntil ? "   " + notice : "");
         public event Action Changed;
+        public event Action<Transform> ShotgunFired;
+        public event Action<Vector3, Transform> StunShotResolved;
         // Audible reload cues only; never forwarded to AI GameplayNoise.
         public event Action<AudioClip> ReloadCuePlayed;
 
@@ -226,13 +228,18 @@ namespace CargoSquad.Combat
             Vector3 origin = transform.position;
             carrier.EmitNoise(new GameplayNoise(origin, Definition.noiseRadius));
             Color color = Definition.effectColor;
-            feedback.Spark(origin + AimDirection * .5f, color, .14f);
+            var stunVisual = Definition.type == WeaponType.Stun ? StunShotResolved : null;
+            if (Definition.type == WeaponType.Shotgun && ShotgunFired != null)
+                ShotgunFired.Invoke(visual.Weapon);
+            else if (stunVisual == null)
+                feedback.Spark(origin + AimDirection * .5f, color, .14f);
             for (int i = 0; i < Definition.pelletCount; i++)
             {
                 float yaw = WeaponDefinition.SampleYaw(i, Definition.pelletCount, EffectiveConeAngle,
                     Definition.spreadPattern, (float)random.NextDouble());
                 Vector3 direction = Quaternion.Euler(0, yaw, 0) * AimDirection;
                 Vector3 end = origin + direction * Definition.range;
+                Transform stunnedTarget = null;
                 // All hits are sorted by distance through nearest selection; self/carry sockets are ignored.
                 // RaycastAll avoids silently missing a wall when a fixed non-alloc buffer overflows.
                 var hits = Physics.RaycastAll(origin, direction, Definition.range, hitMask, QueryTriggerInteraction.Ignore);
@@ -246,12 +253,20 @@ namespace CargoSquad.Combat
                 {
                     var hit = nearest.Value; end = hit.point;
                     var target = hit.collider.GetComponentInParent<IDamageable>();
-                    target?.ApplyDamage(Definition.damage * Mathf.Lerp(1, Definition.endRangeDamageMultiplier, hit.distance / Definition.range));
-                    var wolf = hit.collider.GetComponentInParent<MutatedWolfAI>();
-                    if (wolf && Definition.stunDuration > 0) wolf.TryStun(Definition.stunDuration);
-                    feedback.Spark(end, color, target != null ? .18f : .08f);
+                    float damage = Definition.damage * Mathf.Lerp(1, Definition.endRangeDamageMultiplier, hit.distance / Definition.range);
+                    var healthTarget = target as Health;
+                    bool hasDamageFeedback = healthTarget && healthTarget.HasDamageFeedback;
+                    if (healthTarget) healthTarget.ApplyDamage(damage, hit.point, hit.normal);
+                    else target?.ApplyDamage(damage);
+                    if (Definition.stunDuration > 0)
+                        hit.collider.GetComponentInParent<IStunnable>()?.TryStun(Definition.stunDuration);
+                    if (stunVisual == null && !hasDamageFeedback)
+                        feedback.Spark(end, color, target != null ? .18f : .08f);
+                    else if (stunVisual != null && target != null)
+                        stunnedTarget = hit.collider.transform;
                 }
-                if (Definition.type == WeaponType.Stun) feedback.Electric(origin + direction * .4f, end, color);
+                if (stunVisual != null) stunVisual.Invoke(end, stunnedTarget);
+                else if (Definition.type == WeaponType.Stun) feedback.Electric(origin + direction * .4f, end, color);
                 else feedback.Segment(origin + direction * .4f, end, color);
             }
             return true;

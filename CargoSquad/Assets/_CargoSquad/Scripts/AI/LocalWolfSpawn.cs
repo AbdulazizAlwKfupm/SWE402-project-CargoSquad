@@ -1,22 +1,26 @@
+using CargoSquad.Combat;
 using UnityEngine;
 
 namespace CargoSquad.AI
 {
-    /// <summary>The licensed prefab is installed locally; the public scene contains no restricted asset GUIDs.</summary>
+    /// <summary>Spawns the mission's wolf on its assigned patrol route.</summary>
     public sealed class LocalWolfSpawn : MonoBehaviour
     {
+        [SerializeField] private GameObject wolfPrefab;
         [SerializeField] private Transform[] patrolPoints;
+        [SerializeField] private EnemyDamageBurst damageEffect;
 
         private void Start()
         {
-            var prefab = Resources.Load<GameObject>("MutatedWolfV2");
+            var prefab = wolfPrefab ? wolfPrefab : Resources.Load<GameObject>("MutatedWolfV2");
             if (!prefab)
             {
-                Debug.LogWarning("Approved Mutated Wolf V2 is missing locally. Run Cargo Squad/Enemies/Install Local Wolf V2.", this);
+                Debug.LogWarning("Assign a wolf prefab to this spawner or install the local Wolf V2 fallback.", this);
                 return;
             }
             var instance = Instantiate(prefab, transform.position, transform.rotation);
             instance.GetComponent<MutatedWolfAI>().ConfigurePatrol(patrolPoints);
+            if (damageEffect) instance.AddComponent<EnemyDamageFeedback>().SetEffect(damageEffect);
         }
     }
 }
