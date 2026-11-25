@@ -26,6 +26,17 @@ namespace CargoSquad.Visuals
         [SerializeField] private bool labelVisibility = true;
         [SerializeField] private Material hologramMaterial;
         [SerializeField, Range(24, 96)] private int segments = 64;
+        [Header("Extraction Feedback")]
+        [SerializeField] private Material particleMaterial;
+        [SerializeField, Min(0)] private int particlesPerSecond = 5;
+        [SerializeField, Min(0)] private int successParticleCount = 14;
+        [SerializeField, Range(0f, 1f)] private float particleOpacity = .45f;
+        [SerializeField, Range(0f, 2f)] private float successPulseIntensity = 1f;
+        [SerializeField, Range(.5f, .8f)] private float successPulseDuration = .68f;
+        private ParticleSystem particles;
+        private bool successPlayed;
+        private float pulseStart;
+        private float ambientAccumulator;
         private Mesh mesh;
         private MeshRenderer cylinder;
         private LineRenderer groundRing, topRing, scanRing, leftEdge, rightEdge;
@@ -81,6 +92,7 @@ namespace CargoSquad.Visuals
             scanRing = ConfigureRing("GlowEffects/ScanRing", .018f);
             leftEdge = ConfigureEdge("EdgeLeft"); rightEdge = ConfigureEdge("EdgeRight");
             label = transform.Find("ExtractLabel").GetComponentInChildren<TMP_Text>();
+            if (particleMaterial) CreateParticles();
             Bind(mission, survivor);
         }
         private LineRenderer ConfigureRing(string path, float width)
@@ -103,25 +115,107 @@ namespace CargoSquad.Visuals
         }
         public void Bind(CargoExtraction existingMission, CargoInteractor player)
         {
+            if (isActiveAndEnabled && mission) mission.ResultFinalized -= OnResult;
             mission = existingMission; survivor = player;
+            if (isActiveAndEnabled && mission) mission.ResultFinalized += OnResult;
             zone = mission ? mission.GetComponent<BoxCollider>() : null;
             health = survivor ? survivor.GetComponent<Health>() : null;
             playerCollider = survivor ? survivor.GetComponent<CapsuleCollider>() : null;
         }
+        private void CreateParticles()
+        {
+            var host = new GameObject("Extraction Particles");
+            host.SetActive(false);
+            host.transform.SetParent(transform, false);
+            particles = host.AddComponent<ParticleSystem>();
+            var main = particles.main;
+            main.playOnAwake = false;
+            main.useUnscaledTime = true;
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.maxParticles = 40;
+            var emission = particles.emission;
+            emission.enabled = false;
+            var shape = particles.shape;
+            shape.enabled = false;
+            var fade = particles.colorOverLifetime;
+            fade.enabled = true;
+            var gradient = new Gradient();
+            gradient.SetKeys(new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(Color.white, 1f) },
+                new[] { new GradientAlphaKey(.35f, 0f), new GradientAlphaKey(1f, .2f), new GradientAlphaKey(0f, 1f) });
+            fade.color = gradient;
+            var particleRenderer = host.GetComponent<ParticleSystemRenderer>();
+            particleRenderer.sharedMaterial = particleMaterial;
+            particleRenderer.renderMode = ParticleSystemRenderMode.Billboard;
+            particleRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            var colorOverride = new MaterialPropertyBlock();
+            colorOverride.SetColor("_BaseColor", Color.white);
+            particleRenderer.SetPropertyBlock(colorOverride);
+            host.SetActive(true);
+        }
+
+        private void EmitParticle(bool success)
+        {
+            Vector2 radial = Random.insideUnitCircle * (success ? .95f : .82f);
+            Color color = Color.Lerp(markerColor, Color.white, .3f);
+            color.a = particleOpacity * (success ? 1f : .7f);
+            particles.Emit(new ParticleSystem.EmitParams
+            {
+                position = transform.TransformPoint(new Vector3(radial.x * markerRadius * footprintAspect.x,
+                    .15f, radial.y * markerRadius * footprintAspect.y)),
+                velocity = Vector3.up * Random.Range(.65f, 1.2f) + new Vector3(radial.x, 0f, radial.y) * .35f,
+                startSize = Random.Range(.10f, success ? .24f : .19f),
+                startLifetime = success ? successPulseDuration : Random.Range(.9f, 1.45f),
+                startColor = color
+            }, 1);
+        }
+
+        private void OnResult(MissionResult result)
+        {
+            if (!particles || successPlayed || result.Outcome != MissionOutcome.CargoRecovered) return;
+            successPlayed = true;
+            pulseStart = Time.unscaledTime;
+            particles.Play(false);
+            for (int i = 0; i < successParticleCount; i++) EmitParticle(true);
+        }
+
         private void LateUpdate()
         {
             float wave = Mathf.Sin(Time.time * pulseSpeed);
+            float progress = successPlayed ? Mathf.Clamp01((Time.unscaledTime - pulseStart) / successPulseDuration) : 1f;
+            float successBoost = successPulseIntensity * (1f - progress) * (1f - progress);
+            if (particles && Time.timeScale > 0f && (!mission || !mission.IsComplete))
+            {
+                ambientAccumulator += Time.deltaTime * particlesPerSecond;
+                if (ambientAccumulator >= 1f)
+                {
+                    ambientAccumulator %= 1f;
+                    particles.Play(false);
+                    EmitParticle(false);
+                }
+            }
             PulseBrightness = emissionIntensity * (.88f + .12f * wave);
             Color color = markerColor * PulseBrightness; color.a = transparency;
             tint.SetColor("_BaseColor", color); cylinder.SetPropertyBlock(tint);
             Color edge = markerColor * PulseBrightness; edge.a = .85f;
-            groundRing.startColor = groundRing.endColor = edge;
+            groundRing.startColor = groundRing.endColor = Color.Lerp(edge, Color.white, Mathf.Clamp01(successBoost * .62f));
             topRing.startColor = topRing.endColor = new Color(edge.r, edge.g, edge.b, .45f);
             scanRing.startColor = scanRing.endColor = new Color(edge.r, edge.g, edge.b, .18f);
             groundRing.transform.localPosition = new Vector3(0, .04f, 0);
             groundRing.transform.localScale = Vector3.one * ringSize * (.985f + .015f * wave);
             topRing.transform.localPosition = Vector3.up * markerHeight;
             scanRing.transform.localPosition = Vector3.up * (.08f + Mathf.Repeat(Time.time * .3f, 1) * (markerHeight - .16f));
+            if (progress < 1f)
+            {
+                scanRing.transform.localPosition = Vector3.up * .09f;
+                scanRing.transform.localScale = Vector3.one * Mathf.Lerp(.12f, ringSize, Mathf.SmoothStep(0f, 1f, progress));
+                scanRing.widthMultiplier = .11f;
+                scanRing.startColor = scanRing.endColor = new Color(edge.r, edge.g, edge.b, Mathf.Clamp01(successBoost * .85f));
+            }
+            else if (successPlayed)
+            {
+                scanRing.transform.localScale = Vector3.one;
+                scanRing.widthMultiplier = .018f;
+            }
             MissingCargoPrompt = zone && zone.enabled && survivor && playerCollider && health && !health.IsDead &&
                 !mission.IsComplete && !mission.CargoDestroyed && !mission.IsPrimaryCargo(survivor.CarriedCargo) &&
                 Physics.ComputePenetration(zone, zone.transform.position, zone.transform.rotation,
@@ -143,7 +237,18 @@ namespace CargoSquad.Visuals
             }
             label.text = "EXTRACT";
         }
-        private void OnDisable() => MissingCargoPrompt = false;
+        private void OnEnable()
+        {
+            if (!mission) return;
+            mission.ResultFinalized -= OnResult;
+            mission.ResultFinalized += OnResult;
+        }
+        private void OnDisable()
+        {
+            if (mission) mission.ResultFinalized -= OnResult;
+            if (particles) particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+            MissingCargoPrompt = false;
+        }
         private void OnDestroy() { if (mesh) Destroy(mesh); }
     }
 }

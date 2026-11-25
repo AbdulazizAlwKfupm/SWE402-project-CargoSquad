@@ -158,7 +158,8 @@ namespace CargoSquad.AI
                     {
                         Vector3 offset = Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up);
                         if (offset.magnitude <= reach && Vector3.Angle(transform.forward, offset) <= hitHalfAngle)
-                            survivor.ApplyDamage(State == ArmoredState.HeavySwipe ? swipeDamage : smashDamage);
+                            survivor.ApplyDamageFrom(State == ArmoredState.HeavySwipe ? swipeDamage : smashDamage,
+                                -offset, powerful: true);
                     }
                 }
                 if (pose.normalizedTime < 1f) return;

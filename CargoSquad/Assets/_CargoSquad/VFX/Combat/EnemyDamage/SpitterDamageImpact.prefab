@@ -4895,9 +4895,11 @@ MonoBehaviour:
   accentSize: 0.435
   sparkFlash: 0
   hitFlash:
-    color: {r: 0.82, g: 1, b: 0.66, a: 1}
-    intensity: 0.75
-    duration: 0.1
+    shader: {fileID: 4800000, guid: 1653503f3535475da6886f577c766c00, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1
+    duration: 0.12
+    outlineWidth: 0.036
 --- !u!1 &8020655859041388596
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ namespace CargoSquad.UI
         [SerializeField] private Health survivor;
         [SerializeField] private CharacterSelection selection;
         [SerializeField, Min(.1f)] private float fadeTime = .6f;
+        [SerializeField] private bool useHalfHealthVignette;
         private Volume effect;
         private VolumeProfile profile;
         private ColorAdjustments grading;
@@ -30,19 +31,27 @@ namespace CargoSquad.UI
             var host = new GameObject("Low Health Volume"); host.layer = 28; host.transform.SetParent(transform, false);
             effect = host.AddComponent<Volume>(); effect.isGlobal = true; effect.priority = 10000; effect.weight = 0f;
             profile = ScriptableObject.CreateInstance<VolumeProfile>(); effect.sharedProfile = profile;
-            grading = profile.Add<ColorAdjustments>(false); grading.saturation.Override(-90f);
-            grading.colorFilter.Override(new Color(1f,.70f,.70f));
+            if (!useHalfHealthVignette)
+            {
+                grading = profile.Add<ColorAdjustments>(false);
+                grading.saturation.Override(-90f);
+                grading.colorFilter.Override(new Color(1f,.70f,.70f));
+            }
             vignette = profile.Add<Vignette>(false); vignette.color.Override(new Color(.45f,.015f,.025f));
-            vignette.intensity.Override(.38f); vignette.smoothness.Override(.65f);
+            vignette.intensity.Override(useHalfHealthVignette ? .23f : .38f); vignette.smoothness.Override(.65f);
         }
         private void Update()
         {
-            float desired = survivor && survivor.Current < 40f && (!selection || selection.HasStarted) ? 1f : 0f;
+            float threshold = useHalfHealthVignette && survivor ? survivor.Maximum * .5f : 40f;
+            float desired = survivor && survivor.Current < threshold && (!selection || selection.HasStarted) ? 1f : 0f;
             blend = Mathf.SmoothDamp(blend, desired, ref velocity, fadeTime, Mathf.Infinity, Time.unscaledDeltaTime);
             if (Mathf.Abs(blend - desired) < .001f) blend = desired;
-            float severity = survivor ? Mathf.Clamp01((40f - survivor.Current) / 40f) : 0f;
-            grading.saturation.value = -Mathf.Lerp(65f,90f,severity);
-            vignette.intensity.value = Mathf.Lerp(.25f,.42f,severity) + Mathf.Sin(Time.unscaledTime * 2.5f) * .012f * severity;
+            if (grading)
+            {
+                float severity = survivor ? Mathf.Clamp01((40f - survivor.Current) / 40f) : 0f;
+                grading.saturation.value = -Mathf.Lerp(65f,90f,severity);
+                vignette.intensity.value = Mathf.Lerp(.25f,.42f,severity) + Mathf.Sin(Time.unscaledTime * 2.5f) * .012f * severity;
+            }
             effect.weight = blend;
         }
         private void OnDisable() { if (effect) effect.weight = 0f; }

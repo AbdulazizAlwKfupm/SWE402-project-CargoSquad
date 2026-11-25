@@ -29,6 +29,7 @@ namespace CargoSquad.UI
         private static readonly Color DamageRed = new Color(1f, .28f, .28f);
         private static readonly Color GripOrange = new Color(1f, .64f, .23f);
         private CargoSquad.Visuals.ExtractionMarker extractionMarker;
+        public RectTransform DamageIndicatorRoot => canvasObject ? (RectTransform)canvasObject.transform : null;
         private void OnEnable()
         {
             EnsureInterface(); canvasObject.SetActive(true);

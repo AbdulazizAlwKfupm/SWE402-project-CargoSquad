@@ -180,7 +180,7 @@ namespace CargoSquad.AI
                         {
                             // Capture the impact cargo before health events can end the mission.
                             CargoItem carried = noiseSource ? noiseSource.CarriedCargo : null;
-                            player.GetComponent<IDamageable>()?.ApplyDamage(biteDamage);
+                            targetHealth.ApplyDamageFrom(biteDamage, transform.position - player.transform.position);
                             if (noiseSource) noiseSource.ApplyCarriedImpact(carried, cargoBiteDamage, gripLoss);
                         }
                     }

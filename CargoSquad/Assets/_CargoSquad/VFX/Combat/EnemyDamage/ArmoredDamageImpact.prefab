@@ -4896,9 +4896,11 @@ MonoBehaviour:
   sparkFlash: 1
   sparkFlashSize: 0.29
   hitFlash:
-    color: {r: 1, g: 0.92, b: 0.65, a: 1}
-    intensity: 0.75
-    duration: 0.1
+    shader: {fileID: 4800000, guid: 1653503f3535475da6886f577c766c00, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 1
+    duration: 0.12
+    outlineWidth: 0.036
 --- !u!1 &6717336682090744674
 GameObject:
   m_ObjectHideFlags: 0

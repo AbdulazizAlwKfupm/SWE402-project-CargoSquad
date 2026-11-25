@@ -9,6 +9,7 @@ namespace CargoSquad.AI
         [SerializeField] private GameObject wolfPrefab;
         [SerializeField] private Transform[] patrolPoints;
         [SerializeField] private EnemyDamageBurst damageEffect;
+        [SerializeField] private WolfDeathBurst deathEffect;
 
         private void Start()
         {
@@ -21,6 +22,7 @@ namespace CargoSquad.AI
             var instance = Instantiate(prefab, transform.position, transform.rotation);
             instance.GetComponent<MutatedWolfAI>().ConfigurePatrol(patrolPoints);
             if (damageEffect) instance.AddComponent<EnemyDamageFeedback>().SetEffect(damageEffect);
+            if (deathEffect) instance.AddComponent<WolfDeathFeedback>().SetEffect(deathEffect);
         }
     }
 }

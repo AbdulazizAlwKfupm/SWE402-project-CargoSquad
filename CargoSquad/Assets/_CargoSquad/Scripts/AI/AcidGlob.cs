@@ -76,7 +76,7 @@ namespace CargoSquad.AI
                         .Burst(player ? first.collider.transform : null);
                 }
                 if (player && player.isActiveAndEnabled)
-                    player.GetComponent<IDamageable>()?.ApplyDamage(damage);
+                    player.GetComponent<Health>()?.ApplyDamageFrom(damage, -direction);
                 Destroy(gameObject);
                 return;
             }

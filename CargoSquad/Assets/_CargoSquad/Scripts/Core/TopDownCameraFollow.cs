@@ -16,6 +16,15 @@ namespace CargoSquad
         private Collider targetCollider;
         private Camera view;
         private Vector2 followVelocity;
+        private Vector3 damageOffset;
+        public Vector3 FollowPosition => transform.position - damageOffset;
+
+        public void SetDamageOffset(Vector2 screenOffset)
+        {
+            Vector3 next = transform.right * screenOffset.x + transform.up * screenOffset.y;
+            transform.position += next - damageOffset;
+            damageOffset = next;
+        }
 
         private void Awake()
         {
@@ -35,7 +44,8 @@ namespace CargoSquad
             if (!target)
                 return;
 
-            Vector2 current = new Vector2(transform.position.x - offset.x, transform.position.z - offset.z);
+            Vector3 follow = FollowPosition;
+            Vector2 current = new Vector2(follow.x - offset.x, follow.z - offset.z);
             SetPosition(Vector2.SmoothDamp(current, GetFocus(), ref followVelocity, smoothTime));
         }
 
@@ -60,6 +70,7 @@ namespace CargoSquad
             float floor = playArea ? playArea.bounds.max.y : 0f;
             transform.position = new Vector3(focus.x, floor, focus.y) + offset;
             KeepSurvivorVisible();
+            transform.position += damageOffset;
         }
 
         private void KeepSurvivorVisible()

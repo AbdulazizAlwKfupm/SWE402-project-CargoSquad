@@ -55,6 +55,7 @@ namespace CargoSquad.Cargo
         public event Action<GameplayNoise> NoiseEmitted;
         public void EmitNoise(GameplayNoise noise) => NoiseEmitted?.Invoke(noise);
         public event Action<CargoItem> CarriedCargoChanged;
+        public event Action<Bounds> CargoPickedUp;
         public event Action<CargoItem> CargoDropped;
         public string Prompt { get; private set; }
 
@@ -128,6 +129,8 @@ namespace CargoSquad.Cargo
             Prompt = candidate ? "Press E to Pick Up Cargo" : null;
             if (candidate && pressed)
             {
+                var onPickup = CargoPickedUp;
+                Bounds groundBounds = onPickup != null ? candidate.Collider.bounds : default;
                 CargoCarrySocket socket = carrySocket ? carrySocket : GetComponentInChildren<CargoCarrySocket>();
                 if (socket)
                 {
@@ -142,6 +145,7 @@ namespace CargoSquad.Cargo
                     Grip.BeginCarry();
                 dropBlocked = false;
                 Prompt = "Press E to Drop Cargo";
+                onPickup?.Invoke(groundBounds);
             }
         }
 

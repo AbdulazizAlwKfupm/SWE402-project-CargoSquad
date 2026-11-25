@@ -202,7 +202,7 @@ namespace CargoSquad.AI
                 {
                     Vector3 offset = Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up);
                     if (offset.magnitude <= meleeReach && Vector3.Angle(transform.forward, offset) < 62f && CanSee())
-                        survivor.ApplyDamage(swipeDamage);
+                        survivor.ApplyDamageFrom(swipeDamage, -offset);
                 }
                 nextAttack = Time.time + swipeCooldown;
             }

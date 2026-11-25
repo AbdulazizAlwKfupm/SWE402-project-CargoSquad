@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace CargoSquad.Combat
 {
@@ -10,24 +11,23 @@ namespace CargoSquad.Combat
         [Serializable]
         public struct Settings
         {
+            public Shader shader;
             public Color color;
             [Range(0f, 1.5f)] public float intensity;
             [Range(.02f, .25f)] public float duration;
+            [Range(0f, .09f)] public float outlineWidth;
         }
 
         sealed class Surface
         {
-            public Renderer renderer;
-            public Material[] original;
+            public Renderer body, outline;
+            public Material[] original, flash;
         }
 
-        static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
-        static readonly int EmissionMap = Shader.PropertyToID("_EmissionMap");
         readonly List<Surface> surfaces = new();
-        readonly Dictionary<Material, Material> variants = new();
+        Material bodyMaterial, outlineMaterial;
         Health health;
-        Color peak;
-        float started, duration;
+        float expiresAt;
         bool active;
 
         void Awake() => health = GetComponent<Health>();
@@ -41,78 +41,106 @@ namespace CargoSquad.Combat
 
         public void Play(Settings settings)
         {
-            if (!isActiveAndEnabled || health.IsDead || settings.intensity <= 0f || settings.duration <= 0f)
-                return;
+            if (!isActiveAndEnabled || health.IsDead || !settings.shader ||
+                settings.intensity <= 0f || settings.duration <= 0f) return;
 
-            if (!active)
+            if (!bodyMaterial) BuildSurfaces(settings.shader);
+            if (surfaces.Count == 0) return;
+
+            bodyMaterial.SetColor("_Tint", settings.color * settings.intensity);
+            outlineMaterial.SetColor("_Tint", new Color(.34f, .79f, 1f) * Mathf.Min(settings.intensity, 1f));
+            outlineMaterial.SetFloat("_Width", settings.outlineWidth);
+
+            foreach (var surface in surfaces)
             {
-                surfaces.Clear();
-                foreach (var renderer in GetComponentsInChildren<Renderer>())
+                if (!surface.body || !surface.body.enabled) continue;
+                if (surface.original == null)
                 {
-                    if (!renderer.enabled || (renderer is not MeshRenderer && renderer is not SkinnedMeshRenderer))
-                        continue;
-
-                    var original = renderer.sharedMaterials;
-                    Material[] highlighted = null;
-                    for (int i = 0; i < original.Length; i++)
-                    {
-                        var material = original[i];
-                        if (!material || !material.HasProperty(EmissionColor) || !material.HasProperty(EmissionMap))
-                            continue;
-                        if (!variants.TryGetValue(material, out var variant))
-                        {
-                            // URP Lit needs an emission-enabled material variant. Keep the skinned mesh and base texture.
-                            variant = new Material(material) { name = material.name + " (Hit Flash)" };
-                            variant.EnableKeyword("_EMISSION");
-                            variant.SetTexture(EmissionMap, Texture2D.whiteTexture);
-                            variants.Add(material, variant);
-                        }
-                        highlighted ??= (Material[])original.Clone();
-                        highlighted[i] = variant;
-                    }
-
-                    if (highlighted == null) continue;
-                    surfaces.Add(new Surface { renderer = renderer, original = original });
-                    renderer.sharedMaterials = highlighted;
+                    surface.original = surface.body.sharedMaterials;
+                    surface.body.sharedMaterials = surface.flash;
                 }
-                active = surfaces.Count > 0;
+                surface.outline.enabled = settings.outlineWidth > 0f;
             }
+            active = true;
+            expiresAt = Time.unscaledTime + settings.duration;
+        }
 
-            peak = settings.color * settings.intensity;
-            duration = settings.duration;
-            started = Time.unscaledTime;
-            Apply(1f);
+        void BuildSurfaces(Shader shader)
+        {
+            bodyMaterial = new Material(shader) { name = "Hit Flash Body" };
+            outlineMaterial = new Material(shader) { name = "Hit Flash Outline", renderQueue = 2501 };
+            outlineMaterial.SetFloat("_Cull", (float)CullMode.Front);
+            outlineMaterial.SetFloat("_DepthWrite", 0f);
+
+            foreach (var renderer in GetComponentsInChildren<Renderer>(true))
+            {
+                int slots = renderer.sharedMaterials.Length;
+                if (slots == 0) continue;
+                Renderer outline;
+                if (renderer is SkinnedMeshRenderer skin && skin.sharedMesh)
+                {
+                    var shell = CreateShell(renderer).AddComponent<SkinnedMeshRenderer>();
+                    shell.sharedMesh = skin.sharedMesh;
+                    shell.bones = skin.bones;
+                    shell.rootBone = skin.rootBone;
+                    shell.quality = skin.quality;
+                    shell.localBounds = skin.localBounds;
+                    outline = shell;
+                }
+                else if (renderer is MeshRenderer && renderer.TryGetComponent(out MeshFilter filter) && filter.sharedMesh)
+                {
+                    var shell = CreateShell(renderer);
+                    shell.AddComponent<MeshFilter>().sharedMesh = filter.sharedMesh;
+                    outline = shell.AddComponent<MeshRenderer>();
+                }
+                else continue;
+
+                outline.shadowCastingMode = ShadowCastingMode.Off;
+                outline.receiveShadows = false;
+                var flash = new Material[slots];
+                var edges = new Material[slots];
+                for (int i = 0; i < slots; i++)
+                {
+                    flash[i] = bodyMaterial;
+                    edges[i] = outlineMaterial;
+                }
+                outline.sharedMaterials = edges;
+                outline.enabled = false;
+                surfaces.Add(new Surface { body = renderer, outline = outline, flash = flash });
+            }
+        }
+
+        static GameObject CreateShell(Renderer renderer)
+        {
+            var shell = new GameObject("Hit Flash Outline") { layer = renderer.gameObject.layer };
+            shell.transform.SetParent(renderer.transform, false);
+            return shell;
         }
 
         void LateUpdate()
         {
-            if (!active) return;
-            float progress = (Time.unscaledTime - started) / duration;
-            if (progress >= 1f) Clear();
-            else Apply(1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(.22f, 1f, progress)));
-        }
-
-        void Apply(float strength)
-        {
-            foreach (var entry in variants)
-                entry.Value.SetColor(EmissionColor,
-                    Color.Lerp(entry.Key.IsKeywordEnabled("_EMISSION") ? entry.Key.GetColor(EmissionColor) : Color.black,
-                        peak, strength));
+            if (active && Time.unscaledTime >= expiresAt) Clear();
         }
 
         public void Clear()
         {
             if (!active) return;
             foreach (var surface in surfaces)
-                if (surface.renderer) surface.renderer.sharedMaterials = surface.original;
-            surfaces.Clear();
+            {
+                if (surface.body && surface.original != null) surface.body.sharedMaterials = surface.original;
+                if (surface.outline) surface.outline.enabled = false;
+                surface.original = null;
+            }
             active = false;
         }
 
         void OnDestroy()
         {
             Clear();
-            foreach (var material in variants.Values) Destroy(material);
+            foreach (var surface in surfaces)
+                if (surface.outline) Destroy(surface.outline.gameObject);
+            if (bodyMaterial) Destroy(bodyMaterial);
+            if (outlineMaterial) Destroy(outlineMaterial);
         }
     }
 }

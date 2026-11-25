@@ -3724,6 +3724,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5422516558028691134, guid: 951767797a8446648b9059facdfe73f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 87327463}
+    - targetCorrespondingSourceObject: {fileID: 5422516558028691134, guid: 951767797a8446648b9059facdfe73f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 87327464}
   m_SourcePrefab: {fileID: 100100000, guid: 951767797a8446648b9059facdfe73f4, type: 3}
 --- !u!1 &87327462 stripped
 GameObject:
@@ -3742,9 +3745,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499360ae4551b324d9e82e2f73e8c6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.EnemyDamageFeedback
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 540589468609815873, guid: 4e7f3db69db048d4eab9b90d2c350d34, type: 3}
   fallbackHeight: 1
   minimumBurstInterval: 0.08
+--- !u!114 &87327464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87327462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 941ee7f8bed8b8946a6e60acf3fdbb31, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.SpitterDeathFeedback
+  effectPrefab: {fileID: 6041474650266258621, guid: d9a2b27382ef5ef4d9ef7a071d5ae6aa, type: 3}
 --- !u!1 &88870756
 GameObject:
   m_ObjectHideFlags: 0
@@ -23563,6 +23579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 441706973}
   - component: {fileID: 441706974}
+  - component: {fileID: 441706975}
   m_Layer: 0
   m_Name: Industrial Atmosphere
   m_TagString: Untagged
@@ -23602,6 +23619,68 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 6a70057588127438c9363e3ed6f382db, type: 2}
+--- !u!114 &441706975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441706972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad648f445a14bc1b1e812761ce04926, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Visuals.IndustrialAtmosphereVfx
+  softParticleMaterial: {fileID: 2100000, guid: fe12ec55fa12a8c4494c987113597f07, type: 2}
+  sparkMaterial: {fileID: 2100000, guid: 515d5c73f32c4ea42a9608d679e3ae97, type: 2}
+  emitters:
+  - label: West Wall Service Pipe Steam
+    enabled: 1
+    effect: 0
+    localPosition: {x: -4.69, y: 0.79, z: 4.3}
+    localDrift: {x: 0.6, y: 0.48, z: -0.08}
+    count: 5
+    interval: {x: 3.6, y: 5.6}
+    lifetime: 1.35
+    opacity: 0.32
+  - label: Warehouse Interior Dust
+    enabled: 1
+    effect: 1
+    localPosition: {x: -1.8, y: 1.7, z: 5.2}
+    localDrift: {x: 0.11, y: 0.02, z: -0.055}
+    count: 4
+    interval: {x: 2.2, y: 3.4}
+    lifetime: 4.3
+    opacity: 0.26
+  - label: East Boundary Rubble Dust
+    enabled: 1
+    effect: 1
+    localPosition: {x: 12.5, y: 1.5, z: -8.7}
+    localDrift: {x: -0.12, y: 0.03, z: 0.08}
+    count: 4
+    interval: {x: 2.9, y: 4.2}
+    lifetime: 3.9
+    opacity: 0.24
+  - label: East Warehouse Electrical Cabinet Sparks
+    enabled: 1
+    effect: 2
+    localPosition: {x: 4.38, y: 1.62, z: 3.14}
+    localDrift: {x: -1.15, y: 0.25, z: -0.1}
+    count: 5
+    interval: {x: 4.2, y: 7.5}
+    lifetime: 0.24
+    opacity: 0.8
+  lights:
+  - light: {fileID: 104397895}
+    enabled: 1
+    intensityDip: 0.18
+    interval: {x: 4.8, y: 8.5}
+    duration: 0.56
+  - light: {fileID: 392911284}
+    enabled: 1
+    intensityDip: 0.14
+    interval: {x: 5.2, y: 8.5}
+    duration: 0.61
 --- !u!1 &441798391
 GameObject:
   m_ObjectHideFlags: 0
@@ -28281,6 +28360,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 523484557}
+    - targetCorrespondingSourceObject: {fileID: 4331579900177842358, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 523484558}
   m_SourcePrefab: {fileID: 100100000, guid: 97004e502da2dfa4d834479aea9255c5, type: 3}
 --- !u!1 &523484555 stripped
 GameObject:
@@ -28316,9 +28398,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499360ae4551b324d9e82e2f73e8c6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Combat.EnemyDamageFeedback
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 451771940455051237, guid: 9f4fb7daf376e4d488164a72f3848719, type: 3}
   fallbackHeight: 1.18
   minimumBurstInterval: 0.08
+--- !u!114 &523484558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523484555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a4eb86dd9aea54db52c8b11fc98b16, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.ArmoredDeathFeedback
+  effectPrefab: {fileID: 1832977052011896655, guid: 583d00fd50c7fdb4587004fc6bb13e32, type: 3}
 --- !u!1 &523781957
 GameObject:
   m_ObjectHideFlags: 0
@@ -45576,7 +45671,8 @@ MonoBehaviour:
   - {fileID: 260900322}
   - {fileID: 1735444883}
   - {fileID: 144796449}
-  damageEffect: {fileID: 0}
+  damageEffect: {fileID: 3501825738873494669, guid: 9e1281dda0be4a14a8d13a07688e61b6, type: 3}
+  deathEffect: {fileID: 2880300328848972210, guid: f93d3a97a3080de40a4f6a848c6a27d5, type: 3}
 --- !u!4 &845296896
 Transform:
   m_ObjectHideFlags: 0
@@ -62784,6 +62880,8 @@ GameObject:
   - component: {fileID: 1171018299}
   - component: {fileID: 1171018301}
   - component: {fileID: 1171018302}
+  - component: {fileID: 1171018303}
+  - component: {fileID: 1171018304}
   m_Layer: 0
   m_Name: PlayerPlaceholder
   m_TagString: Untagged
@@ -62791,6 +62889,47 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1171018303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171018289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882cd2137df0479a98ee0eddffc0435e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Player.SurvivorDamageFeedback
+  selection: {fileID: 765815202}
+  hud: {fileID: 1509678290}
+  cameraFollow: {fileID: 1509678289}
+  flashShader: {fileID: 4800000, guid: 1653503f3535475da6886f577c766c00, type: 3}
+  flashColor: {r: 1, g: 0.6, b: 0.59, a: 1}
+  flashDuration: 0.125
+  indicatorDuration: 0.52
+  shakeAmplitude: 0.13
+  shakeDuration: 0.18
+--- !u!114 &1171018304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171018289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c598c80c4394fda8d16cf5d58a8554a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.Cargo.CargoPickupDust
+  dustMaterial: {fileID: 2100000, guid: fe12ec55fa12a8c4494c987113597f07, type: 2}
+  particleCount: 10
+  particleSize: 0.82
+  lifetime: 0.36
+  dropParticleCount: 12
+  dropParticleSize: 0.9
+  dropOpacity: 0.9
+  dropLifetime: 0.43
 --- !u!23 &1171018290
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -80058,6 +80197,7 @@ GameObject:
   - component: {fileID: 1509678289}
   - component: {fileID: 1509678290}
   - component: {fileID: 1509678291}
+  - component: {fileID: 1509678292}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -80065,6 +80205,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1509678292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509678285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbb1358d1354b049793230454201f1d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.UI.LowHealthFeedback
+  survivor: {fileID: 1171018300}
+  selection: {fileID: 765815202}
+  fadeTime: 0.45
+  useHalfHealthVignette: 1
 --- !u!81 &1509678286
 AudioListener:
   m_ObjectHideFlags: 0
@@ -94967,6 +95123,10 @@ PrefabInstance:
       propertyPath: survivor
       value: 
       objectReference: {fileID: 1171018296}
+    - target: {fileID: 7226806880647622467, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
+      propertyPath: particleMaterial
+      value:
+      objectReference: {fileID: 2100000, guid: fe12ec55fa12a8c4494c987113597f07, type: 2}
     - target: {fileID: 7226806880647622467, guid: cbf465e0e031b9c42803d2b9c2480756, type: 3}
       propertyPath: markerRadius
       value: 1.625
