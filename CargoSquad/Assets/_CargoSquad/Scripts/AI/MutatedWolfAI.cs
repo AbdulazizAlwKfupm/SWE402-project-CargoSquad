@@ -52,6 +52,8 @@ namespace CargoSquad.AI
         public Vector3 LastKnownPosition => lastKnown;
         public float AttackCooldown => attackCooldown;
         public float BiteDamage => biteDamage;
+        /// <summary>Raised at the bite's impact frame (not for bites cancelled by stun or death).</summary>
+        public event System.Action BiteContact;
         private NavMeshAgent agent;
         private Health health;
         private PlayerController player;
@@ -74,6 +76,7 @@ namespace CargoSquad.AI
         private void Awake()
         {
             if (!GetComponent<CargoSquad.UI.WolfHealthIndicator>()) gameObject.AddComponent<CargoSquad.UI.WolfHealthIndicator>();
+            EnemyAudio.Ensure(this);
             agent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
             home = transform.position;
@@ -176,6 +179,7 @@ namespace CargoSquad.AI
                     if (!biteApplied && Time.time >= biteStarted + biteDuration * biteImpactFraction)
                     {
                         biteApplied = true;
+                        BiteContact?.Invoke(); // Notification only (audio); the bite resolves exactly as before.
                         if (targetHealth && !targetHealth.IsDead && DistanceToTarget() <= attackRange && CanSeeTarget())
                         {
                             // Capture the impact cargo before health events can end the mission.

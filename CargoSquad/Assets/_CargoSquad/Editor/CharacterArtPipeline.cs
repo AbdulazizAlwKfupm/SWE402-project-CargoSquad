@@ -153,6 +153,16 @@ namespace CargoSquad.Editor
         }
 
         /// <summary>Reloads the active scene from disk, dropping unsaved changes. Only call after checking what they are.</summary>
+        /// <summary>Leaves a test runner scratch scene (InitTestScene*) and reopens a project scene. Refuses other dirty scenes.</summary>
+        private static string OpenProjectScene(string path)
+        {
+            Scene active = SceneManager.GetActiveScene();
+            if (active.isDirty && !Path.GetFileName(active.path).StartsWith("InitTestScene"))
+                throw new InvalidOperationException(active.path + " has unsaved changes.");
+            EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            return "opened " + path;
+        }
+
         private static string DiscardSceneChanges()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode)

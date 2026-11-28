@@ -38,6 +38,8 @@ namespace CargoSquad.AI
         public float AttackReach => reach;
         public float AttackHalfAngle => hitHalfAngle;
         public event System.Action GroundSmashContact;
+        /// <summary>Raised at the heavy swipe's contact frame (notification only).</summary>
+        public event System.Action SwipeContact;
 
         public bool TryGetSmashWindup(out float progress)
         {
@@ -57,6 +59,7 @@ namespace CargoSquad.AI
             agent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
             guardPoint = transform.position;
+            EnemyAudio.Ensure(this);
         }
 
         private void OnEnable()
@@ -154,6 +157,7 @@ namespace CargoSquad.AI
                 {
                     contactSpent = true;
                     if (State == ArmoredState.GroundSmash) GroundSmashContact?.Invoke();
+                    else SwipeContact?.Invoke();
                     if (SeesSurvivor())
                     {
                         Vector3 offset = Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up);

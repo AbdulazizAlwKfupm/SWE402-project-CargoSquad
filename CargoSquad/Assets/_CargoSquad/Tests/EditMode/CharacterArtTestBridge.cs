@@ -22,7 +22,10 @@ namespace CargoSquad.Tests
             string file = Path.Combine(Folder, "tests.txt");
             if (File.Exists(file))
                 File.Delete(file);
-            var filter = new Filter { testMode = mode == "PlayMode" ? TestMode.PlayMode : TestMode.EditMode };
+            // "PlayMode" runs the whole platform; "PlayMode Full.Test.Class.Name" runs only that test class.
+            string[] parts = mode.Split(new[] { ' ' }, 2);
+            var filter = new Filter { testMode = parts[0] == "PlayMode" ? TestMode.PlayMode : TestMode.EditMode };
+            if (parts.Length > 1) filter.groupNames = new[] { "^" + System.Text.RegularExpressions.Regex.Escape(parts[1]) };
             ScriptableObject.CreateInstance<TestRunnerApi>().Execute(new ExecutionSettings(filter));
             return $"started {mode}";
         }

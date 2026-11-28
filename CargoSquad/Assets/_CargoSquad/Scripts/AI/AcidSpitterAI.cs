@@ -31,6 +31,8 @@ namespace CargoSquad.AI
         [SerializeField, Min(0)] float stunImmunity = 1.2f;
 
         public SpitterState State { get; private set; }
+        /// <summary>Raised when an acid glob actually leaves the mouth, and at the claw swipe's contact frame.</summary>
+        public event System.Action SpitLaunched, SwipeContact;
         static readonly int[] Clips = System.Array.ConvertAll(System.Enum.GetNames(typeof(SpitterState)),
             name => Animator.StringToHash("Base Layer." + name));
         NavMeshAgent agent;
@@ -51,6 +53,7 @@ namespace CargoSquad.AI
             health = GetComponent<Health>();
             home = transform.position;
             homeRotation = transform.rotation;
+            EnemyAudio.Ensure(this);
         }
 
         void OnEnable()
@@ -191,13 +194,17 @@ namespace CargoSquad.AI
             {
                 spent = true;
                 if (TargetAlive)
+                {
                     Instantiate(projectile, mouth.position, Quaternion.identity)
                         .Launch(transform, aimPoint, projectileSpeed, spitDamage, detectionRange);
+                    SpitLaunched?.Invoke(); // Notification only (audio).
+                }
                 nextAttack = Time.time + spitCooldown;
             }
             if (State == SpitterState.MeleeSwipe && !spent && pose.normalizedTime >= contactFrame)
             {
                 spent = true;
+                SwipeContact?.Invoke(); // Notification only (audio).
                 if (TargetAlive)
                 {
                     Vector3 offset = Vector3.ProjectOnPlane(player.transform.position - transform.position, Vector3.up);

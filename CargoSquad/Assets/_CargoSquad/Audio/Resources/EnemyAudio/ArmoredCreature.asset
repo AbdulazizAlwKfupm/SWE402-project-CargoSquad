@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0336e3ac1467db845066d1646642c4c, type: 3}
+  m_Name: ArmoredCreature
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.EnemyAudioProfile
+  footstepRecording: {fileID: 8300000, guid: cbba5d602e9b3cc11038ae3be08dbee3, type: 3}
+  stepStarts:
+  - 0.1
+  - 1.03
+  - 1.99
+  - 2.99
+  - 4.03
+  - 4.99
+  - 6.02
+  - 7.02
+  - 8.02
+  - 9.01
+  - 10.01
+  - 11
+  - 12.02
+  - 13
+  - 14.01
+  maxStepLength: 0.9
+  footstepVolume: 0.45
+  footstepPitch: {x: 0.95, y: 1.04}
+  metresPerStep: 1.6
+  minimumSpeed: 0.25
+  primaryAttack:
+    clip: {fileID: 8300000, guid: bc610af1c38ff193858b147a4717de96, type: 3}
+    startAt: 0.62
+    maxLength: 0
+    volume: 0.75
+    pitch: {x: 0.96, y: 1.04}
+  secondaryAttack:
+    clip: {fileID: 8300000, guid: 76c063fe77c6dbd693ee07997e626b9c, type: 3}
+    startAt: 1.25
+    maxLength: 0
+    volume: 0.85
+    pitch: {x: 0.97, y: 1.03}
+  hurt:
+    clip: {fileID: 8300000, guid: 8f7583f2a121ba22c1cbd844ade2deb2, type: 3}
+    startAt: 0.5
+    maxLength: 1.3
+    volume: 0.6
+    pitch: {x: 0.93, y: 1.07}
+  hurtInterval: 0.3
+  death:
+    clip: {fileID: 8300000, guid: db499ea4f350ef6eb8ffbc58fa67f56f, type: 3}
+    startAt: 0.17
+    maxLength: 0
+    volume: 0.85
+    pitch: {x: 1, y: 1}
+  minDistance: 31
+  maxDistance: 52

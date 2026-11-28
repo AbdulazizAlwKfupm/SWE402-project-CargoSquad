@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0336e3ac1467db845066d1646642c4c, type: 3}
+  m_Name: MutatedWolf
+  m_EditorClassIdentifier: CargoSquad.Runtime::CargoSquad.AI.EnemyAudioProfile
+  footstepRecording: {fileID: 8300000, guid: 32b89ea5c6e1aa332e865989be2d31ce, type: 3}
+  stepStarts:
+  - 0.1
+  - 0.88
+  - 1.9
+  - 2.58
+  - 3.31
+  - 4.01
+  - 4.69
+  - 5.37
+  - 6.03
+  - 6.71
+  - 7.42
+  - 8.09
+  - 8.78
+  - 9.51
+  - 10.15
+  maxStepLength: 0.5
+  footstepVolume: 0.3
+  footstepPitch: {x: 0.93, y: 1.07}
+  metresPerStep: 1.25
+  minimumSpeed: 0.25
+  primaryAttack:
+    clip: {fileID: 8300000, guid: 658306a5f64bc49b3f9e9d34c545f681, type: 3}
+    startAt: 0
+    maxLength: 0
+    volume: 0.75
+    pitch: {x: 0.96, y: 1.04}
+  secondaryAttack:
+    clip: {fileID: 0}
+    startAt: 0
+    maxLength: 0
+    volume: 0.7
+    pitch: {x: 1, y: 1}
+  hurt:
+    clip: {fileID: 8300000, guid: d1a288bf70496a644341ffed2bd9aece, type: 3}
+    startAt: 0.03
+    maxLength: 1.6
+    volume: 0.6
+    pitch: {x: 0.92, y: 1.08}
+  hurtInterval: 0.3
+  death:
+    clip: {fileID: 8300000, guid: b4e9c9aaf55fb09e572194c0995ba078, type: 3}
+    startAt: 0.25
+    maxLength: 0
+    volume: 0.8
+    pitch: {x: 1, y: 1}
+  minDistance: 31
+  maxDistance: 52
